@@ -1,0 +1,50 @@
+# Python virtual environments
+.venv/
+.venv*/
+venv/
+env/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+.ipynb_checkpoints/
+
+# Claude Code local settings (not part of the project)
+.claude/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Training / inference outputs (experiment dirs + checkpoints)
+/exp/
+/exp_finetune/
+/exp_smoke/
+/exp_dolly*/
+/exp_via*/
+/output/
+/runs/
+*.log
+*.pt
+*.pid
+
+# Datasets and generated corpora (too large for GitHub)
+/data/
+/data_dolly*/
+/data_audio*/
+/dataset/
+/raw/
+
+# Generated tokenizer corpora
+/bpe_model/spm_corpus.txt
+
+# Large model export artifacts
+*.onnx
