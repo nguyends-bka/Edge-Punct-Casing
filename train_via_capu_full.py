@@ -58,10 +58,18 @@ def main():
     ap.add_argument("--val_frac", type=float, default=0.02)
     ap.add_argument("--num_workers", type=int, default=6)
     ap.add_argument("--punct_weights", type=str, default="1.0,1.6,1.05,1.4")
+    # --- scaling knobs (defaults reproduce the 3.58M ablation model) ---
+    ap.add_argument("--d", type=int, default=256)
+    ap.add_argument("--ac_gru_layers", type=int, default=1)
+    ap.add_argument("--cross_layers", type=int, default=1)
+    ap.add_argument("--n_heads", type=int, default=4)
+    ap.add_argument("--adjacent_heads", type=int, default=0)
+    ap.add_argument("--tag", type=str, default=None,
+                    help="checkpoint tag; default 'ac'/'text' by --use_acoustic")
     args = ap.parse_args()
 
     Path(args.exp_dir).mkdir(exist_ok=True)
-    tag = "ac" if args.use_acoustic else "text"
+    tag = args.tag or ("ac" if args.use_acoustic else "text")
     setup_logger(f"{args.exp_dir}/log-{tag}")
     dev = torch.device("cuda", 0) if torch.cuda.is_available() else torch.device("cpu")
     torch.manual_seed(42)
@@ -83,9 +91,14 @@ def main():
     va = DataLoader(MemmapClipDS(meta, mel, val_idx), batch_size=args.batch_size, shuffle=False,
                     collate_fn=collate, num_workers=args.num_workers)
 
-    model = ViACaPu(sp.get_piece_size(), d=256, use_acoustic=bool(args.use_acoustic), dropout=args.dropout).to(dev)
+    model = ViACaPu(sp.get_piece_size(), d=args.d, use_acoustic=bool(args.use_acoustic),
+                    dropout=args.dropout, ac_gru_layers=args.ac_gru_layers,
+                    cross_layers=args.cross_layers, n_heads=args.n_heads,
+                    adjacent_heads=bool(args.adjacent_heads)).to(dev)
     npar = sum(p.numel() for p in model.parameters())
-    logging.info(f"use_acoustic={args.use_acoustic} | params {npar/1e6:.2f}M")
+    logging.info(f"use_acoustic={args.use_acoustic} | d={args.d} ac_gru={args.ac_gru_layers} "
+                 f"cross={args.cross_layers} heads={args.n_heads} adj={args.adjacent_heads} "
+                 f"| params {npar/1e6:.2f}M")
 
     pw = torch.tensor([float(x) for x in args.punct_weights.split(",")], device=dev)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
