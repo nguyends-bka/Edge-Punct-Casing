@@ -66,6 +66,9 @@ def main():
     ap.add_argument("--adjacent_heads", type=int, default=0)
     ap.add_argument("--tag", type=str, default=None,
                     help="checkpoint tag; default 'ac'/'text' by --use_acoustic")
+    ap.add_argument("--init_from", type=str, default=None,
+                    help="warm-start: load model weights from this .pt before training "
+                         "(optimizer/scheduler start fresh)")
     args = ap.parse_args()
 
     Path(args.exp_dir).mkdir(exist_ok=True)
@@ -99,6 +102,10 @@ def main():
     logging.info(f"use_acoustic={args.use_acoustic} | d={args.d} ac_gru={args.ac_gru_layers} "
                  f"cross={args.cross_layers} heads={args.n_heads} adj={args.adjacent_heads} "
                  f"| params {npar/1e6:.2f}M")
+    if args.init_from:
+        ck = torch.load(args.init_from, map_location="cpu")
+        model.load_state_dict(ck["model"])
+        logging.info(f"warm-start: loaded model weights from {args.init_from}")
 
     pw = torch.tensor([float(x) for x in args.punct_weights.split(",")], device=dev)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)

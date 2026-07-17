@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ai/ngocmx/Edge-Punct-Casing
+cd "$(dirname "$(readlink -f "$0")")"
 echo "waiting for extraction to finish..." > full_pipeline.log
 while ! grep -q "^DONE:" data_audio_full_extract.log 2>/dev/null; do sleep 60; done
 echo "extraction done at $(date)" >> full_pipeline.log

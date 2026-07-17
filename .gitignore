@@ -33,15 +33,17 @@ Thumbs.db
 /output/
 /runs/
 *.log
+*.log.*
 *.pt
 *.pid
 
-# Datasets and generated corpora (too large for GitHub)
-/data/
-/data_dolly*/
-/data_audio*/
-/dataset/
-/raw/
+# Datasets and generated corpora (too large for GitHub).
+# No trailing slash: these may be symlinks to external storage.
+/data
+/data_dolly*
+/data_audio*
+/dataset
+/raw
 
 # Generated tokenizer corpora
 /bpe_model/spm_corpus.txt
