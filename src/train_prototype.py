@@ -10,76 +10,14 @@ from pathlib import Path
 import numpy as np
 import torch
 import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 import sentencepiece as spm
 
-from model_via_capu import ViACaPu
-from decode import get_metrics, print_metrics, punct_id, case_id
+from .model import ViACaPu
+from .data import ClipDS, collate, to_dev
+from .metrics import evaluate, get_metrics, print_metrics, punct_id, case_id
 import logging
-from utils import setup_logger
-
-
-class ClipDS(Dataset):
-    def __init__(self, path):
-        self.data = torch.load(path)
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, i):
-        return self.data[i]
-
-
-def collate(batch):
-    B = len(batch)
-    Lmax = max(e["tokens"].shape[0] for e in batch)
-    Wmax = max(e["case"].shape[0] for e in batch)
-    Tmax = max(e["mel"].shape[0] for e in batch)
-
-    tokens = torch.zeros(B, Lmax, dtype=torch.long)
-    tok_mask = torch.zeros(B, Lmax, dtype=torch.bool)
-    word_pos = torch.zeros(B, Wmax, dtype=torch.long)
-    word_mask = torch.zeros(B, Wmax, dtype=torch.bool)
-    score_mask = torch.zeros(B, Wmax, dtype=torch.bool)
-    case = torch.zeros(B, Wmax, dtype=torch.long)
-    punct = torch.zeros(B, Wmax, dtype=torch.long)
-    mel = torch.zeros(B, Tmax, 80, dtype=torch.float32)
-    mel_len = torch.zeros(B, dtype=torch.long)
-
-    for b, e in enumerate(batch):
-        L = e["tokens"].shape[0]; W = e["case"].shape[0]; T = e["mel"].shape[0]
-        tokens[b, :L] = e["tokens"]; tok_mask[b, :L] = True
-        wp = e["valid"].nonzero(as_tuple=False).squeeze(1)  # [W]
-        word_pos[b, :W] = wp; word_mask[b, :W] = True
-        score_mask[b, :W] = True
-        score_mask[b, 0] = False; score_mask[b, W - 1] = False  # drop <s>/</s>
-        case[b, :W] = e["case"]; punct[b, :W] = e["punct"]
-        mel[b, :T] = e["mel"].float(); mel_len[b] = T
-    return dict(tokens=tokens, tok_mask=tok_mask, word_pos=word_pos, word_mask=word_mask,
-                score_mask=score_mask, case=case, punct=punct, mel=mel, mel_len=mel_len)
-
-
-def to_dev(batch, dev):
-    return {k: v.to(dev) for k, v in batch.items()}
-
-
-@torch.no_grad()
-def evaluate(model, dl, dev):
-    model.eval()
-    cp, ct, pp, pt = [], [], [], []
-    for batch in dl:
-        batch = to_dev(batch, dev)
-        cl, pl, _ = model(batch)
-        m = batch["score_mask"]
-        cp.append(cl.argmax(-1)[m].cpu().numpy()); ct.append(batch["case"][m].cpu().numpy())
-        pp.append(pl.argmax(-1)[m].cpu().numpy()); pt.append(batch["punct"][m].cpu().numpy())
-    cp, ct = np.concatenate(cp), np.concatenate(ct)
-    pp, pt = np.concatenate(pp), np.concatenate(pt)
-
-    def overall_f1(pred, true):
-        _, _, _, ov = get_metrics(pred, true)
-        return ov[2]
-    return overall_f1(cp, ct), overall_f1(pp, pt), (cp, ct, pp, pt)
+from .utils import setup_logger
 
 
 def main():

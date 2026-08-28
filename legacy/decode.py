@@ -10,17 +10,18 @@ import random
 from shutil import copyfile
 from typing import Any, Dict, Optional, Tuple, Union
 import sentencepiece as spm
-# from model import Model_new as Model
-from data_module import DataModule, sort_batch
 import torch.distributed as dist
 from datetime import datetime
 import torch.nn.functional as F
-from train import get_model, get_params
 from utils import (AttributeDict, setup_logger)
 from tqdm import tqdm
 
-import onnxruntime as ort
 import numpy as np
+
+# NOTE: the legacy CLI decoder in main() below depends on data_module/train/onnxruntime
+# (the original Rud-nin pipeline, now under legacy/). Those are imported lazily inside
+# main() so the ViACaPu training code can import get_metrics/print_metrics/punct_id/
+# case_id from this module without pulling in the legacy stack.
 
 ##### usage
 ## python3 decode.py --data_dir ../data/ --exp_dir ../output/ --bpe_model ../bpe_model/bpe.model --batch 1000
@@ -147,6 +148,11 @@ def print_metrics(logging, precision, recall, f_scores, overall, label_map):
 
 @torch.no_grad()
 def main():
+    # legacy CLI decoder — lazy imports keep the ViACaPu path free of the legacy stack
+    from data_module import DataModule, sort_batch
+    from train import get_model, get_params
+    import onnxruntime as ort
+
     parser = get_parser()
 
     args = parser.parse_args()

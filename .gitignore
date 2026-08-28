@@ -25,11 +25,9 @@ Thumbs.db
 *.swo
 
 # Training / inference outputs (experiment dirs + checkpoints)
-/exp/
-/exp_finetune/
-/exp_smoke/
-/exp_dolly*/
-/exp_via*/
+/experiments/
+/exp_seed/
+/exp_via_full/
 /output/
 /runs/
 *.log
@@ -38,12 +36,8 @@ Thumbs.db
 *.pid
 
 # Datasets and generated corpora (too large for GitHub).
-# No trailing slash: these may be symlinks to external storage.
-/data
-/data_dolly*
-/data_audio*
-/dataset
-/raw
+# data/ holds SSD copies + symlinks to external storage (HDD / ngocmx account).
+/data/
 
 # Generated tokenizer corpora
 /bpe_model/spm_corpus.txt

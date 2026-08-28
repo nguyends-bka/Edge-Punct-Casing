@@ -39,13 +39,15 @@ class ViACaPu(nn.Module):
     def __init__(self, vocab_size, d=256, n_case=4, n_punct=4,
                  use_acoustic=True, dropout=0.3,
                  ac_gru_layers=1, cross_layers=1, n_heads=4,
-                 adjacent_heads=False):
+                 adjacent_heads=False, gate_bias=None):
         """Defaults reproduce the original 3.58M ablation model exactly.
 
         Scaling knobs for the <15M "L" config:
           d=384, ac_gru_layers=2, cross_layers=2, n_heads=6, adjacent_heads=True
         adjacent_heads: Model_new trick — case head sees (prev, cur) word states,
         punct head sees (cur, next); heads take 2d input.
+        gate_bias: init fusion-gate bias to this value (negative => z starts low,
+        more acoustic context flows early; counters gate collapse). None = default init.
         """
         super().__init__()
         self.use_acoustic = use_acoustic
@@ -70,6 +72,9 @@ class ViACaPu(nn.Module):
                  for _ in range(cross_layers - 1)])
             self.gate_extra = nn.ModuleList(
                 [nn.Linear(2 * d, d) for _ in range(cross_layers - 1)])
+            if gate_bias is not None:
+                for g in [self.gate, *self.gate_extra]:
+                    nn.init.constant_(g.bias, gate_bias)
 
         # --- word-level sequential + heads ---
         self.wlstm = nn.LSTM(d, d // 2, 1, bidirectional=True, batch_first=True)
