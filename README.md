@@ -13,7 +13,11 @@ qua gated cross-attention (alignment-free), **3.58M tham số**.
 
 Phát hiện cốt lõi: nhánh ngữ âm chỉ đóng góp **ổn định** khi bộ mã hóa ngữ âm được
 giám sát bằng mất mát phụ dự đoán năng lượng (`--aux_energy_w`); nếu không, kết quả
-dao động mạnh theo seed. Chi tiết: [docs/VIACAPU.md](docs/VIACAPU.md).
+phân thành hai chế độ tách biệt theo seed. Chi tiết: [docs/VIACAPU.md](docs/VIACAPU.md).
+
+**Trước khi tiếp tục nghiên cứu, đọc
+[docs/TRANG_THAI_VA_VIEC_CAN_LAM.md](docs/TRANG_THAI_VA_VIEC_CAN_LAM.md)** — ghi lại
+các quyết định khoa học, giới hạn đã biết, và bốn việc cần làm theo thứ tự ưu tiên.
 
 ## Cấu trúc thư mục
 
