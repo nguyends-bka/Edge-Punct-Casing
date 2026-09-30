@@ -294,7 +294,7 @@ UniPunc~\cite{unipunc}              & BERT + wav2vec 2.0, $d{=}768^\dagger$ & v�
 You \& Li~\cite{you2024lightweight} & 7\,MB$^\ddagger$; 7{,}26M$^{\dagger*}$ & văn bản & gắn ngoài \\
 Trinh và cs.~\cite{trinh2026}       & 68M$^\dagger$ (RNN-T)               & văn bản + ngữ âm & tích hợp trong ASR \\
 \midrule
-\textbf{ViACaPu (bài này)}          & \textbf{3{,}58M}$^\dagger$          & \textbf{văn bản + ngữ âm} & \textbf{gắn ngoài} \\
+\textbf{ViACaPu (bài này)}          & \textbf{4{,}93\,MB}$^\ddagger$; \textbf{3{,}58M}$^\dagger$ & \textbf{văn bản + ngữ âm} & \textbf{gắn ngoài} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1129,7 +1129,11 @@ ghép cặp theo seed). Khi tăng bề rộng lên 7.34 triệu tham số tại
 $d{=}384$ --- kể cả khi giữ nguyên mất mát phụ để so sánh công bằng --- chất
 lượng không tăng ($0{,}928$ so với $0{,}927$) mà chi phí \emph{huấn luyện} mỗi
 epoch cao hơn khoảng $3.7\times$ (Mục~\ref{sec:capacity}). Cấu hình 3.58 triệu
-tham số vì vậy là lựa chọn hợp lý trong số các cấu hình đã khảo sát.
+tham số vì vậy là lựa chọn hợp lý trong số các cấu hình đã khảo sát. Về phía
+triển khai, mô hình xuất sang ONNX và lượng tử hoá INT8 cho tệp 4.93\,MB, nhỏ
+hơn mức 7\,MB của mô hình cơ sở~\cite{you2024lightweight} trong khi F1 dấu câu
+cao hơn $0{,}358$ --- nghĩa là lợi ích chất lượng ở đây không đánh đổi bằng
+kích thước triển khai.
 
 \textbf{Hàm ý thiết kế.} Cơ chế hợp nhất không yêu cầu dấu thời gian mức từ:
 mỗi biểu diễn từ truy vấn trực tiếp chuỗi khung ngữ âm bằng cross-attention. Điều
@@ -1166,10 +1170,18 @@ chứng mạnh nhất mà cỡ mẫu cho phép là chênh lệch ghép cặp the
 về dấu (Mục~\ref{sec:ablation}), và chúng tôi trình bày kết quả ở dạng
 trung bình\,$\pm$\,độ lệch chuẩn thay vì tuyên bố ý nghĩa thống kê. Về khía cạnh
 triển khai, lập luận về tính phù hợp với thiết bị biên trong bài dựa trên
-\emph{ngân sách tham số} (3.58 triệu, nhỏ hơn mô hình cơ sở và nhỏ hơn các hệ
-dựa trên PLM từ một đến hai bậc độ lớn); chúng tôi \emph{không} đo độ trễ suy
-luận, RTF hay bộ nhớ đỉnh trên phần cứng biên, nên các con số về quy mô nên được
-hiểu là điều kiện cần chứ chưa phải bằng chứng đầy đủ về khả năng triển khai.
+\emph{ngân sách tham số} (3.58 triệu) và \emph{kích thước mô hình sau lượng tử
+hoá}: xuất ViACaPu sang ONNX rồi lượng tử hoá động trọng số về INT8 cho tệp
+\textbf{4.93\,MB} (từ 13.71\,MB ở FP32), tức nhỏ hơn $1{,}4\times$ so với mức
+7\,MB mà~\cite{you2024lightweight} công bố cho mô hình cơ sở --- đây là phép so
+sánh cùng đơn vị đo, vì cả hai đều là tệp ONNX đã lượng tử hoá. Cần nêu rõ ba
+giới hạn của con số này. Thứ nhất, kích thước tệp không phụ thuộc phần cứng nên
+so sánh được, nhưng nó \emph{không} thay thế cho các phép đo phụ thuộc phần
+cứng: chúng tôi \emph{không} đo độ trễ suy luận, RTF hay bộ nhớ đỉnh trên thiết
+bị biên thật. Thứ hai, chúng tôi mới xác nhận mô hình INT8 \emph{nạp và chạy
+được}, chứ chưa chấm lại F1 của nó trên tập kiểm định, nên chưa loại trừ được
+khả năng lượng tử hoá làm giảm chất lượng. Thứ ba, đầu phụ dự đoán năng lượng
+đã được loại khỏi đồ thị xuất, đúng như thiết kế (Mục~\ref{sec:audio}).
 Cuối cùng, kiến trúc hiện dùng
 các lớp hai chiều (BiLSTM/BiGRU), nên chưa phải mô hình streaming theo nghĩa nhân
 quả nghiêm ngặt; đánh giá chunked/causal là một hướng thực nghiệm tiếp theo.
