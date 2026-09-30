@@ -56,7 +56,7 @@ def style(ax):
 # ---------------------------------------------------------------- fig1: compare
 def fig_compare():
     models = [("Baseline [1]", 7.26, 0.936, 0.569, C_BASE),
-              ("ViACaPu\n(text-only)", 2.68, 0.938, 0.820, C_TEXT),
+              ("ViACaPu\n(text-only)", 2.68, 0.937, 0.820, C_TEXT),
               ("ViACaPu\n(acoustic+aux)", 3.58, 0.944, 0.927, C_AC)]
     fig, axes = plt.subplots(1, 2, figsize=(DBL, 2.7))
     x = np.arange(len(models))

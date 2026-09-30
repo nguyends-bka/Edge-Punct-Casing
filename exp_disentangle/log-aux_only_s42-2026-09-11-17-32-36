@@ -1,0 +1,27 @@
+2026-09-11 17:32:36,921 INFO [train.py:76] clips: 658128 | train 644966 val 13162 | mel frames 350.4M
+2026-09-11 17:32:37,032 INFO [train.py:90] use_acoustic=1 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 3.58M
+2026-09-11 17:40:01,552 INFO [train.py:132] ep 00 | 444s | loss 0.145 | val CaseF1 0.908 PunctF1 0.873  *best*
+2026-09-11 17:47:25,114 INFO [train.py:132] ep 01 | 444s | loss 0.094 | val CaseF1 0.918 PunctF1 0.885  *best*
+2026-09-11 17:54:48,899 INFO [train.py:132] ep 02 | 444s | loss 0.086 | val CaseF1 0.922 PunctF1 0.887  *best*
+2026-09-11 18:02:12,496 INFO [train.py:132] ep 03 | 444s | loss 0.081 | val CaseF1 0.924 PunctF1 0.891  *best*
+2026-09-11 18:09:36,691 INFO [train.py:132] ep 04 | 444s | loss 0.077 | val CaseF1 0.926 PunctF1 0.903  *best*
+2026-09-11 18:17:00,125 INFO [train.py:132] ep 05 | 443s | loss 0.073 | val CaseF1 0.928 PunctF1 0.904  *best*
+2026-09-11 18:24:23,531 INFO [train.py:132] ep 06 | 443s | loss 0.069 | val CaseF1 0.934 PunctF1 0.906  *best*
+2026-09-11 18:31:47,123 INFO [train.py:132] ep 07 | 444s | loss 0.064 | val CaseF1 0.937 PunctF1 0.913  *best*
+2026-09-11 18:39:10,185 INFO [train.py:132] ep 08 | 443s | loss 0.059 | val CaseF1 0.939 PunctF1 0.918  *best*
+2026-09-11 18:46:33,848 INFO [train.py:132] ep 09 | 444s | loss 0.054 | val CaseF1 0.940 PunctF1 0.919  *best*
+2026-09-11 18:53:57,425 INFO [train.py:132] ep 10 | 444s | loss 0.049 | val CaseF1 0.943 PunctF1 0.922  *best*
+2026-09-11 19:01:21,008 INFO [train.py:132] ep 11 | 444s | loss 0.045 | val CaseF1 0.944 PunctF1 0.924  *best*
+2026-09-11 19:01:21,008 INFO [train.py:135] BEST use_acoustic=1: CaseF1 0.944 PunctF1 0.924
+2026-09-11 19:01:26,269 INFO [train.py:137] CASE (final):
+2026-09-11 19:01:26,422 INFO [metrics.py:53] LOWER: 	Prec [0.993], 	Rec [0.997], 	F1 [0.995], 
+2026-09-11 19:01:26,422 INFO [metrics.py:53] UPPER: 	Prec [0.934], 	Rec [0.829], 	F1 [0.879], 
+2026-09-11 19:01:26,422 INFO [metrics.py:53] CAP: 	Prec [0.965], 	Rec [0.925], 	F1 [0.945], 
+2026-09-11 19:01:26,422 INFO [metrics.py:53] MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+2026-09-11 19:01:26,422 INFO [metrics.py:58] Overall: 	Prec [0.964], 	Rec [0.924], 	F1 [0.944], 
+2026-09-11 19:01:26,422 INFO [train.py:138] PUNCT (final):
+2026-09-11 19:01:26,575 INFO [metrics.py:53] NO_PUNCT: 	Prec [0.995], 	Rec [0.995], 	F1 [0.995], 
+2026-09-11 19:01:26,575 INFO [metrics.py:53] COMMA: 	Prec [0.865], 	Rec [0.895], 	F1 [0.880], 
+2026-09-11 19:01:26,575 INFO [metrics.py:53] PERIOD: 	Prec [0.983], 	Rec [0.955], 	F1 [0.969], 
+2026-09-11 19:01:26,575 INFO [metrics.py:53] QUESTION: 	Prec [0.795], 	Rec [0.737], 	F1 [0.765], 
+2026-09-11 19:01:26,575 INFO [metrics.py:58] Overall: 	Prec [0.925], 	Rec [0.923], 	F1 [0.924], 
