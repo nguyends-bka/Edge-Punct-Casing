@@ -1,0 +1,24 @@
+{
+  "exp_seed/best_ac_s42_aux5.pt": {
+    "val_dev": {
+      "case_f1": 0.9443,
+      "punct_f1": 0.927
+    },
+    "test": {
+      "case_f1": 0.9441,
+      "punct_f1": 0.9287
+    },
+    "delta_punct_f1": -0.0017
+  },
+  "exp_seed/best_ac_s44_aux5.pt": {
+    "val_dev": {
+      "case_f1": 0.9413,
+      "punct_f1": 0.9212
+    },
+    "test": {
+      "case_f1": 0.9432,
+      "punct_f1": 0.9244
+    },
+    "delta_punct_f1": -0.0032
+  }
+}

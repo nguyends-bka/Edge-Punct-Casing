@@ -1,0 +1,35 @@
+{
+  "exp_seed/best_text_s42.pt": {
+    "val_dev": {
+      "case_f1": 0.9368,
+      "punct_f1": 0.8216
+    },
+    "test": {
+      "case_f1": 0.9364,
+      "punct_f1": 0.8191
+    },
+    "delta_punct_f1": 0.0025
+  },
+  "exp_seed/best_text_s43.pt": {
+    "val_dev": {
+      "case_f1": 0.9374,
+      "punct_f1": 0.821
+    },
+    "test": {
+      "case_f1": 0.9393,
+      "punct_f1": 0.8174
+    },
+    "delta_punct_f1": 0.0036
+  },
+  "exp_seed/best_text_s44.pt": {
+    "val_dev": {
+      "case_f1": 0.9373,
+      "punct_f1": 0.8209
+    },
+    "test": {
+      "case_f1": 0.9369,
+      "punct_f1": 0.8233
+    },
+    "delta_punct_f1": -0.0024
+  }
+}

@@ -1,0 +1,27 @@
+2026-08-27 14:54:26,870 INFO [train_via_capu_full.py:100] clips: 658128 | train 644966 val 13162 | mel frames 350.4M
+2026-08-27 14:54:26,981 INFO [train_via_capu_full.py:114] use_acoustic=1 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 3.58M
+2026-08-27 15:01:50,829 INFO [train_via_capu_full.py:156] ep 00 | 443s | loss 0.144 | val CaseF1 0.909 PunctF1 0.880  *best*
+2026-08-27 15:09:14,906 INFO [train_via_capu_full.py:156] ep 01 | 444s | loss 0.091 | val CaseF1 0.920 PunctF1 0.900  *best*
+2026-08-27 15:16:39,062 INFO [train_via_capu_full.py:156] ep 02 | 444s | loss 0.080 | val CaseF1 0.923 PunctF1 0.911  *best*
+2026-08-27 15:24:02,989 INFO [train_via_capu_full.py:156] ep 03 | 444s | loss 0.073 | val CaseF1 0.922 PunctF1 0.914  *best*
+2026-08-27 15:31:27,101 INFO [train_via_capu_full.py:156] ep 04 | 444s | loss 0.069 | val CaseF1 0.925 PunctF1 0.914  *best*
+2026-08-27 15:38:51,172 INFO [train_via_capu_full.py:156] ep 05 | 444s | loss 0.066 | val CaseF1 0.930 PunctF1 0.916  *best*
+2026-08-27 15:46:14,430 INFO [train_via_capu_full.py:156] ep 06 | 443s | loss 0.063 | val CaseF1 0.931 PunctF1 0.917  *best*
+2026-08-27 15:53:37,373 INFO [train_via_capu_full.py:156] ep 07 | 443s | loss 0.059 | val CaseF1 0.936 PunctF1 0.923  *best*
+2026-08-27 16:01:00,978 INFO [train_via_capu_full.py:156] ep 08 | 444s | loss 0.054 | val CaseF1 0.939 PunctF1 0.927  *best*
+2026-08-27 16:08:24,260 INFO [train_via_capu_full.py:156] ep 09 | 443s | loss 0.050 | val CaseF1 0.943 PunctF1 0.927  *best*
+2026-08-27 16:15:47,404 INFO [train_via_capu_full.py:156] ep 10 | 443s | loss 0.045 | val CaseF1 0.944 PunctF1 0.928  *best*
+2026-08-27 16:23:10,494 INFO [train_via_capu_full.py:156] ep 11 | 443s | loss 0.041 | val CaseF1 0.945 PunctF1 0.930  *best*
+2026-08-27 16:23:10,494 INFO [train_via_capu_full.py:159] BEST use_acoustic=1: CaseF1 0.945 PunctF1 0.930
+2026-08-27 16:23:15,578 INFO [train_via_capu_full.py:161] CASE (final):
+2026-08-27 16:23:15,740 INFO [decode.py:139] LOWER: 	Prec [0.994], 	Rec [0.997], 	F1 [0.995], 
+2026-08-27 16:23:15,740 INFO [decode.py:139] UPPER: 	Prec [0.952], 	Rec [0.821], 	F1 [0.882], 
+2026-08-27 16:23:15,740 INFO [decode.py:139] CAP: 	Prec [0.963], 	Rec [0.930], 	F1 [0.946], 
+2026-08-27 16:23:15,740 INFO [decode.py:139] MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+2026-08-27 16:23:15,740 INFO [decode.py:143] Overall: 	Prec [0.963], 	Rec [0.928], 	F1 [0.945], 
+2026-08-27 16:23:15,740 INFO [train_via_capu_full.py:162] PUNCT (final):
+2026-08-27 16:23:15,903 INFO [decode.py:139] NO_PUNCT: 	Prec [0.996], 	Rec [0.996], 	F1 [0.996], 
+2026-08-27 16:23:15,903 INFO [decode.py:139] COMMA: 	Prec [0.877], 	Rec [0.910], 	F1 [0.893], 
+2026-08-27 16:23:15,903 INFO [decode.py:139] PERIOD: 	Prec [0.984], 	Rec [0.955], 	F1 [0.969], 
+2026-08-27 16:23:15,903 INFO [decode.py:139] QUESTION: 	Prec [0.777], 	Rec [0.737], 	F1 [0.756], 
+2026-08-27 16:23:15,903 INFO [decode.py:143] Overall: 	Prec [0.930], 	Rec [0.930], 	F1 [0.930], 

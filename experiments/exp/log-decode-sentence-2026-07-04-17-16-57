@@ -1,0 +1,11 @@
+2026-07-04 17:16:57,324 INFO [decode_sentence.py:208] Decoding started
+2026-07-04 17:16:57,324 INFO [decode_sentence.py:214] Device: cpu
+2026-07-04 17:16:57,325 INFO [decode_sentence.py:221] {'vocab_size': 3500, 'embedding_dim': 100, 'sequence_size': 200, 'hidden_size1': 384, 'hidden_size2': 384, 'out_size_case': 4, 'out_size_punct': 4, 'dropout': 0.5, 'gamma': 0.5, 'factor': 0.8, 'patience': 2, 'log_interval': 100, 'valid_interval': 300, 'batch_idx_train': 0, 'save_every_n': 200, 'best_train_loss': inf, 'best_valid_loss': inf, 'best_train_epoch': -1, 'best_valid_epoch': -1, 'case_loss': -1, 'punct_loss': -1, 'text_file': './example/input.txt', 'exp_dir': PosixPath('exp'), 'bpe_model': './bpe_model/bpe.model', 'max_seq_length': 200, 'epoch': 11, 'batch': -1}
+2026-07-04 17:16:57,325 INFO [decode_sentence.py:223] About to create model
+2026-07-04 17:16:57,354 INFO [decode_sentence.py:228] Number of model parameters: 7257676
+2026-07-04 17:16:57,355 INFO [decode_sentence.py:234] Loading checkpoint from exp/epoch-10.pt
+2026-07-04 17:16:57,414 INFO [decode_sentence.py:84] Encoding sentences...
+2026-07-04 17:16:57,415 INFO [decode_sentence.py:127] Input sentences number is too small to be packed to one sample length(200)
+2026-07-04 17:16:57,439 INFO [decode_sentence.py:249] Result ==> case pred:tensor([2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0,
+        0, 2, 0, 2, 0, 2, 0, 2, 2]), punct pred:tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0, 0, 0, 0, 0])

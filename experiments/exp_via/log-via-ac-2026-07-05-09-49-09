@@ -1,0 +1,39 @@
+2026-07-05 09:49:11,241 INFO [train_via_capu.py:110] use_acoustic=1 | params=3,583,369 (3.58M)
+2026-07-05 09:49:16,967 INFO [train_via_capu.py:134] ep 00 | train_loss 0.554 | val CaseF1 0.872 PunctF1 0.528  *best*
+2026-07-05 09:49:21,607 INFO [train_via_capu.py:134] ep 01 | train_loss 0.330 | val CaseF1 0.895 PunctF1 0.594  *best*
+2026-07-05 09:49:26,265 INFO [train_via_capu.py:134] ep 02 | train_loss 0.249 | val CaseF1 0.904 PunctF1 0.646  *best*
+2026-07-05 09:49:30,973 INFO [train_via_capu.py:134] ep 03 | train_loss 0.179 | val CaseF1 0.913 PunctF1 0.645  *best*
+2026-07-05 09:49:35,681 INFO [train_via_capu.py:134] ep 04 | train_loss 0.121 | val CaseF1 0.907 PunctF1 0.638
+2026-07-05 09:49:40,325 INFO [train_via_capu.py:134] ep 05 | train_loss 0.085 | val CaseF1 0.904 PunctF1 0.643
+2026-07-05 09:49:44,994 INFO [train_via_capu.py:134] ep 06 | train_loss 0.059 | val CaseF1 0.915 PunctF1 0.658  *best*
+2026-07-05 09:49:49,683 INFO [train_via_capu.py:134] ep 07 | train_loss 0.044 | val CaseF1 0.922 PunctF1 0.660  *best*
+2026-07-05 09:49:54,410 INFO [train_via_capu.py:134] ep 08 | train_loss 0.033 | val CaseF1 0.915 PunctF1 0.647
+2026-07-05 09:49:59,112 INFO [train_via_capu.py:134] ep 09 | train_loss 0.024 | val CaseF1 0.920 PunctF1 0.664  *best*
+2026-07-05 09:50:03,786 INFO [train_via_capu.py:134] ep 10 | train_loss 0.018 | val CaseF1 0.916 PunctF1 0.670  *best*
+2026-07-05 09:50:08,487 INFO [train_via_capu.py:134] ep 11 | train_loss 0.015 | val CaseF1 0.920 PunctF1 0.652
+2026-07-05 09:50:13,182 INFO [train_via_capu.py:134] ep 12 | train_loss 0.011 | val CaseF1 0.916 PunctF1 0.657
+2026-07-05 09:50:17,876 INFO [train_via_capu.py:134] ep 13 | train_loss 0.009 | val CaseF1 0.914 PunctF1 0.667
+2026-07-05 09:50:22,619 INFO [train_via_capu.py:134] ep 14 | train_loss 0.006 | val CaseF1 0.920 PunctF1 0.665
+2026-07-05 09:50:27,333 INFO [train_via_capu.py:134] ep 15 | train_loss 0.004 | val CaseF1 0.920 PunctF1 0.668  *best*
+2026-07-05 09:50:32,023 INFO [train_via_capu.py:134] ep 16 | train_loss 0.003 | val CaseF1 0.917 PunctF1 0.662
+2026-07-05 09:50:36,713 INFO [train_via_capu.py:134] ep 17 | train_loss 0.002 | val CaseF1 0.918 PunctF1 0.667
+2026-07-05 09:50:41,410 INFO [train_via_capu.py:134] ep 18 | train_loss 0.002 | val CaseF1 0.920 PunctF1 0.669  *best*
+2026-07-05 09:50:46,118 INFO [train_via_capu.py:134] ep 19 | train_loss 0.002 | val CaseF1 0.922 PunctF1 0.667  *best*
+2026-07-05 09:50:50,854 INFO [train_via_capu.py:134] ep 20 | train_loss 0.001 | val CaseF1 0.920 PunctF1 0.668
+2026-07-05 09:50:55,569 INFO [train_via_capu.py:134] ep 21 | train_loss 0.001 | val CaseF1 0.917 PunctF1 0.664
+2026-07-05 09:51:00,214 INFO [train_via_capu.py:134] ep 22 | train_loss 0.001 | val CaseF1 0.919 PunctF1 0.665
+2026-07-05 09:51:04,879 INFO [train_via_capu.py:134] ep 23 | train_loss 0.001 | val CaseF1 0.920 PunctF1 0.665
+2026-07-05 09:51:09,538 INFO [train_via_capu.py:134] ep 24 | train_loss 0.001 | val CaseF1 0.920 PunctF1 0.665
+2026-07-05 09:51:09,539 INFO [train_via_capu.py:137] 
+BEST use_acoustic=1: CaseF1 0.922 PunctF1 0.667
+2026-07-05 09:51:09,756 INFO [train_via_capu.py:140] CASE (final):
+2026-07-05 09:51:09,764 INFO [decode.py:139] LOWER: 	Prec [0.982], 	Rec [0.993], 	F1 [0.987], 
+2026-07-05 09:51:09,764 INFO [decode.py:139] UPPER: 	Prec [0.857], 	Rec [0.462], 	F1 [0.600], 
+2026-07-05 09:51:09,764 INFO [decode.py:139] CAP: 	Prec [0.951], 	Rec [0.894], 	F1 [0.922], 
+2026-07-05 09:51:09,764 INFO [decode.py:143] Overall: 	Prec [0.951], 	Rec [0.890], 	F1 [0.920], 
+2026-07-05 09:51:09,764 INFO [train_via_capu.py:141] PUNCT (final):
+2026-07-05 09:51:09,771 INFO [decode.py:139] NO_PUNCT: 	Prec [0.951], 	Rec [0.973], 	F1 [0.962], 
+2026-07-05 09:51:09,771 INFO [decode.py:139] COMMA: 	Prec [0.529], 	Rec [0.405], 	F1 [0.459], 
+2026-07-05 09:51:09,771 INFO [decode.py:139] PERIOD: 	Prec [0.962], 	Rec [0.878], 	F1 [0.918], 
+2026-07-05 09:51:09,771 INFO [decode.py:139] QUESTION: 	Prec [0.550], 	Rec [0.537], 	F1 [0.543], 
+2026-07-05 09:51:09,771 INFO [decode.py:143] Overall: 	Prec [0.731], 	Rec [0.610], 	F1 [0.665], 

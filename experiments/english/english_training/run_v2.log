@@ -1,0 +1,109 @@
+========== [公曆 20廿六年 七月 十八日 週六 十時39分35秒] ENGLISH V2 START ==========
+>>> V2 1/3: acoustic + aux-energy + gate-bias + lr-const
+2026-07-18 10:39:36,522 INFO [train_via_capu_full.py:97] clips: 162082 | train 158841 val 3241 | mel frames 145.7M
+2026-07-18 10:39:36,639 INFO [train_via_capu_full.py:111] use_acoustic=1 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 3.58M
+2026-07-18 10:41:59,576 INFO [train_via_capu_full.py:153] ep 00 | 142s | loss 0.201 | val CaseF1 0.923 PunctF1 0.750  *best*
+2026-07-18 10:44:21,571 INFO [train_via_capu_full.py:153] ep 01 | 142s | loss 0.138 | val CaseF1 0.929 PunctF1 0.777  *best*
+2026-07-18 10:46:43,428 INFO [train_via_capu_full.py:153] ep 02 | 142s | loss 0.126 | val CaseF1 0.935 PunctF1 0.785  *best*
+2026-07-18 10:49:05,268 INFO [train_via_capu_full.py:153] ep 03 | 142s | loss 0.119 | val CaseF1 0.935 PunctF1 0.791  *best*
+2026-07-18 10:51:27,109 INFO [train_via_capu_full.py:153] ep 04 | 142s | loss 0.115 | val CaseF1 0.936 PunctF1 0.792  *best*
+2026-07-18 10:53:48,966 INFO [train_via_capu_full.py:153] ep 05 | 142s | loss 0.111 | val CaseF1 0.934 PunctF1 0.792
+2026-07-18 10:56:10,747 INFO [train_via_capu_full.py:153] ep 06 | 142s | loss 0.107 | val CaseF1 0.934 PunctF1 0.783
+2026-07-18 10:58:32,596 INFO [train_via_capu_full.py:153] ep 07 | 142s | loss 0.103 | val CaseF1 0.943 PunctF1 0.798  *best*
+2026-07-18 11:00:54,409 INFO [train_via_capu_full.py:153] ep 08 | 142s | loss 0.098 | val CaseF1 0.942 PunctF1 0.797
+2026-07-18 11:03:16,401 INFO [train_via_capu_full.py:153] ep 09 | 142s | loss 0.092 | val CaseF1 0.944 PunctF1 0.804  *best*
+2026-07-18 11:05:38,158 INFO [train_via_capu_full.py:153] ep 10 | 142s | loss 0.085 | val CaseF1 0.944 PunctF1 0.802
+2026-07-18 11:07:59,938 INFO [train_via_capu_full.py:153] ep 11 | 142s | loss 0.076 | val CaseF1 0.946 PunctF1 0.797
+2026-07-18 11:10:21,692 INFO [train_via_capu_full.py:153] ep 12 | 142s | loss 0.067 | val CaseF1 0.945 PunctF1 0.801
+2026-07-18 11:12:43,446 INFO [train_via_capu_full.py:153] ep 13 | 142s | loss 0.057 | val CaseF1 0.942 PunctF1 0.795
+2026-07-18 11:15:05,187 INFO [train_via_capu_full.py:153] ep 14 | 142s | loss 0.048 | val CaseF1 0.943 PunctF1 0.796
+2026-07-18 11:17:27,084 INFO [train_via_capu_full.py:153] ep 15 | 142s | loss 0.043 | val CaseF1 0.943 PunctF1 0.796
+2026-07-18 11:17:27,084 INFO [train_via_capu_full.py:156] BEST use_acoustic=1: CaseF1 0.944 PunctF1 0.804
+2026-07-18 11:17:28,801 INFO [train_via_capu_full.py:158] CASE (final):
+2026-07-18 11:17:28,844 INFO [decode.py:139] LOWER: 	Prec [0.992], 	Rec [0.994], 	F1 [0.993], 
+2026-07-18 11:17:28,845 INFO [decode.py:139] UPPER: 	Prec [0.992], 	Rec [0.982], 	F1 [0.987], 
+2026-07-18 11:17:28,845 INFO [decode.py:139] CAP: 	Prec [0.940], 	Rec [0.929], 	F1 [0.934], 
+2026-07-18 11:17:28,845 INFO [decode.py:139] MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+2026-07-18 11:17:28,845 INFO [decode.py:143] Overall: 	Prec [0.948], 	Rec [0.938], 	F1 [0.943], 
+2026-07-18 11:17:28,845 INFO [train_via_capu_full.py:159] PUNCT (final):
+2026-07-18 11:17:28,887 INFO [decode.py:139] NO_PUNCT: 	Prec [0.984], 	Rec [0.979], 	F1 [0.982], 
+2026-07-18 11:17:28,887 INFO [decode.py:139] COMMA: 	Prec [0.639], 	Rec [0.700], 	F1 [0.668], 
+2026-07-18 11:17:28,887 INFO [decode.py:139] PERIOD: 	Prec [0.924], 	Rec [0.940], 	F1 [0.932], 
+2026-07-18 11:17:28,887 INFO [decode.py:139] QUESTION: 	Prec [0.812], 	Rec [0.750], 	F1 [0.780], 
+2026-07-18 11:17:28,887 INFO [decode.py:143] Overall: 	Prec [0.775], 	Rec [0.818], 	F1 [0.796], 
+>>> V2 2/3: text-only (ablation, cùng BPE mới)
+2026-07-18 11:17:31,444 INFO [train_via_capu_full.py:97] clips: 162082 | train 158841 val 3241 | mel frames 145.7M
+2026-07-18 11:17:31,546 INFO [train_via_capu_full.py:111] use_acoustic=0 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 2.68M
+2026-07-18 11:18:24,971 INFO [train_via_capu_full.py:153] ep 00 | 53s | loss 0.206 | val CaseF1 0.923 PunctF1 0.753  *best*
+2026-07-18 11:19:16,715 INFO [train_via_capu_full.py:153] ep 01 | 52s | loss 0.138 | val CaseF1 0.927 PunctF1 0.776  *best*
+2026-07-18 11:20:08,454 INFO [train_via_capu_full.py:153] ep 02 | 52s | loss 0.125 | val CaseF1 0.936 PunctF1 0.785  *best*
+2026-07-18 11:21:00,804 INFO [train_via_capu_full.py:153] ep 03 | 52s | loss 0.119 | val CaseF1 0.934 PunctF1 0.787
+2026-07-18 11:21:52,538 INFO [train_via_capu_full.py:153] ep 04 | 52s | loss 0.114 | val CaseF1 0.936 PunctF1 0.790  *best*
+2026-07-18 11:22:44,069 INFO [train_via_capu_full.py:153] ep 05 | 52s | loss 0.111 | val CaseF1 0.936 PunctF1 0.790  *best*
+2026-07-18 11:23:36,306 INFO [train_via_capu_full.py:153] ep 06 | 52s | loss 0.107 | val CaseF1 0.937 PunctF1 0.792  *best*
+2026-07-18 11:24:28,313 INFO [train_via_capu_full.py:153] ep 07 | 52s | loss 0.103 | val CaseF1 0.941 PunctF1 0.801  *best*
+2026-07-18 11:25:20,322 INFO [train_via_capu_full.py:153] ep 08 | 52s | loss 0.098 | val CaseF1 0.943 PunctF1 0.803  *best*
+2026-07-18 11:26:12,514 INFO [train_via_capu_full.py:153] ep 09 | 52s | loss 0.091 | val CaseF1 0.943 PunctF1 0.805  *best*
+2026-07-18 11:27:04,513 INFO [train_via_capu_full.py:153] ep 10 | 52s | loss 0.084 | val CaseF1 0.945 PunctF1 0.807  *best*
+2026-07-18 11:27:56,608 INFO [train_via_capu_full.py:153] ep 11 | 52s | loss 0.075 | val CaseF1 0.943 PunctF1 0.806
+2026-07-18 11:28:49,809 INFO [train_via_capu_full.py:153] ep 12 | 53s | loss 0.065 | val CaseF1 0.945 PunctF1 0.804
+2026-07-18 11:29:42,705 INFO [train_via_capu_full.py:153] ep 13 | 53s | loss 0.055 | val CaseF1 0.943 PunctF1 0.802
+2026-07-18 11:30:34,677 INFO [train_via_capu_full.py:153] ep 14 | 52s | loss 0.047 | val CaseF1 0.943 PunctF1 0.798
+2026-07-18 11:31:27,029 INFO [train_via_capu_full.py:153] ep 15 | 52s | loss 0.041 | val CaseF1 0.943 PunctF1 0.796
+2026-07-18 11:31:27,029 INFO [train_via_capu_full.py:156] BEST use_acoustic=0: CaseF1 0.945 PunctF1 0.807
+2026-07-18 11:31:28,284 INFO [train_via_capu_full.py:158] CASE (final):
+2026-07-18 11:31:28,327 INFO [decode.py:139] LOWER: 	Prec [0.992], 	Rec [0.994], 	F1 [0.993], 
+2026-07-18 11:31:28,327 INFO [decode.py:139] UPPER: 	Prec [0.989], 	Rec [0.983], 	F1 [0.986], 
+2026-07-18 11:31:28,327 INFO [decode.py:139] CAP: 	Prec [0.942], 	Rec [0.926], 	F1 [0.934], 
+2026-07-18 11:31:28,327 INFO [decode.py:139] MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+2026-07-18 11:31:28,327 INFO [decode.py:143] Overall: 	Prec [0.950], 	Rec [0.935], 	F1 [0.943], 
+2026-07-18 11:31:28,327 INFO [train_via_capu_full.py:159] PUNCT (final):
+2026-07-18 11:31:28,370 INFO [decode.py:139] NO_PUNCT: 	Prec [0.984], 	Rec [0.979], 	F1 [0.982], 
+2026-07-18 11:31:28,370 INFO [decode.py:139] COMMA: 	Prec [0.642], 	Rec [0.688], 	F1 [0.664], 
+2026-07-18 11:31:28,370 INFO [decode.py:139] PERIOD: 	Prec [0.923], 	Rec [0.944], 	F1 [0.933], 
+2026-07-18 11:31:28,370 INFO [decode.py:139] QUESTION: 	Prec [0.919], 	Rec [0.760], 	F1 [0.832], 
+2026-07-18 11:31:28,370 INFO [decode.py:143] Overall: 	Prec [0.779], 	Rec [0.813], 	F1 [0.796], 
+>>> V2 3/3: eval test
+TEST: 1663 clips
+
+=== best_en2_ac.pt | use_acoustic=1 | 35,775 words ===
+CASE:
+LOWER: 	Prec [0.991], 	Rec [0.994], 	F1 [0.993], 
+UPPER: 	Prec [0.992], 	Rec [0.984], 	F1 [0.988], 
+CAP: 	Prec [0.942], 	Rec [0.923], 	F1 [0.932], 
+MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+Overall: 	Prec [0.950], 	Rec [0.933], 	F1 [0.941], 
+PUNCT:
+NO_PUNCT: 	Prec [0.984], 	Rec [0.982], 	F1 [0.983], 
+COMMA: 	Prec [0.675], 	Rec [0.685], 	F1 [0.680], 
+PERIOD: 	Prec [0.916], 	Rec [0.945], 	F1 [0.930], 
+QUESTION: 	Prec [0.829], 	Rec [0.817], 	F1 [0.823], 
+Overall: 	Prec [0.801], 	Rec [0.820], 	F1 [0.811], 
+
+Punct confusion (hàng=true, cột=pred) [NONE,COMMA,PERIOD,QUES]:
+  NONE    [31916   474   109     2]
+  COMMA   [ 459 1055   27    0]
+  PERIOD  [  50   31 1571   10]
+  QUES    [ 1  4  8 58]
+TEST: 1663 clips
+
+=== best_en2_text.pt | use_acoustic=0 | 35,775 words ===
+CASE:
+LOWER: 	Prec [0.993], 	Rec [0.992], 	F1 [0.993], 
+UPPER: 	Prec [0.979], 	Rec [0.992], 	F1 [0.986], 
+CAP: 	Prec [0.931], 	Rec [0.934], 	F1 [0.933], 
+MIX_CASE: 	Prec [1.000], 	Rec [0.966], 	F1 [0.982], 
+Overall: 	Prec [0.939], 	Rec [0.943], 	F1 [0.941], 
+PUNCT:
+NO_PUNCT: 	Prec [0.985], 	Rec [0.983], 	F1 [0.984], 
+COMMA: 	Prec [0.680], 	Rec [0.682], 	F1 [0.681], 
+PERIOD: 	Prec [0.912], 	Rec [0.949], 	F1 [0.930], 
+QUESTION: 	Prec [0.814], 	Rec [0.803], 	F1 [0.809], 
+Overall: 	Prec [0.803], 	Rec [0.820], 	F1 [0.811], 
+
+Punct confusion (hàng=true, cột=pred) [NONE,COMMA,PERIOD,QUES]:
+  NONE    [31939   452   108     2]
+  COMMA   [ 455 1051   35    0]
+  PERIOD  [  33   41 1577   11]
+  QUES    [ 3  2  9 57]
+========== [公曆 20廿六年 七月 十八日 週六 十一時卅一分34秒] ENGLISH V2 DONE ==========

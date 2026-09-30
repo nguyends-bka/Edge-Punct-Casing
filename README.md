@@ -57,3 +57,46 @@ bash scripts/run_aux_seeds.sh
 
 Data mel Dolly nằm ở `data/data_audio_full` (symlink). Nếu mất, trích lại bằng
 `tools/extract_dolly_audio_full.py`.
+
+## Repo này chứa gì và KHÔNG chứa gì
+
+Repo được dùng làm bản lưu đầy đủ của phần **không tái tạo được nếu không còn
+máy/GPU gốc**. Tổng ~262 MB.
+
+**Có trong repo:**
+
+| Thư mục | Nội dung |
+|---|---|
+| `exp_seed/` | 10 checkpoint multi-seed: text/acoustic × seed 42-44, và biến thể `_aux5` |
+| `exp_disentangle/` | 6 checkpoint lưới 2×2 tách biến `aux_energy_w` vs `gate_bias` |
+| `exp_via_384_aux/` | checkpoint đối chứng d=384 kèm aux loss (7.34M tham số) |
+| `exp_via_full/` | 2 checkpoint chạy đơn ban đầu |
+| `experiments/` | **chỉ log** của các lần chạy cũ (`exp_dolly*`, `exp_via*`, `english/`) |
+| `bpe_model/` | tokenizer SentencePiece — **bắt buộc** phải khớp thì checkpoint mới dùng được |
+| `Paper_resource/` | bài báo `.tex`, hình `.pdf`/`.png`, script sinh hình |
+
+**KHÔNG có trong repo, và cách lấy lại:**
+
+| Thiếu | Dung lượng | Tái tạo bằng |
+|---|---|---|
+| `data/` (mel memmap, dataset) | ~51 GB | `tools/extract_dolly_audio_full.py` từ `dolly-vn/dolly-audio-1000h-vietnamese` trên HuggingFace |
+| `experiments/**/*.pt` | ~18 GB | Chạy lại từ script trong `scripts/`; đây là các lần chạy cũ **đã bị thay thế**, log vẫn còn để đối chiếu |
+| `.venv/` | ~5.6 GB | `python3 -m venv .venv && pip install torch numpy sentencepiece` |
+
+Lý do loại: GitHub chặn file trên 100 MB, và `data/data_libritts_train_ssd/mel.f16`
+riêng nó đã 28 GB. Các file này đều là **đặc trưng đã trích xuất** hoặc **checkpoint
+của lần chạy cũ**, tính lại được từ code trong repo.
+
+## Dùng lại checkpoint trên máy khác
+
+```bash
+git clone https://github.com/nguyends-bka/Edge-Punct-Casing.git
+cd Edge-Punct-Casing
+
+# checkpoint chính của bài (acoustic + aux, seed 43 — kết quả tốt nhất 0.930)
+python3 -m tools.export_onnx --ckpt exp_seed/best_ac_s43_aux5.pt --out ac_aux.onnx
+```
+
+Checkpoint lưu dạng `{"model": state_dict}`; nạp bằng
+`ViACaPu(vocab_size=3500, d=256, use_acoustic=True)` rồi `load_state_dict`.
+Riêng `exp_via_384_aux/best_d384_aux_s42.pt` cần `d=384`.

@@ -1,0 +1,54 @@
+2026-07-05 00:23:59,691 INFO [train.py:379] Device: cuda:0
+2026-07-05 00:23:59,692 INFO [train.py:386] {'vocab_size': 3500, 'embedding_dim': 256, 'sequence_size': 200, 'hidden_size1': 384, 'hidden_size2': 384, 'out_size_case': 4, 'out_size_punct': 4, 'dropout': 0.3, 'gamma': 0.5, 'factor': 0.8, 'patience': 2, 'log_interval': 100, 'valid_interval': 300, 'batch_idx_train': 0, 'save_every_n': 200, 'best_train_loss': inf, 'best_valid_loss': inf, 'best_train_epoch': -1, 'best_valid_epoch': -1, 'case_loss': -1, 'punct_loss': -1, 'world_size': 1, 'master_port': 12354, 'tensorboard': True, 'start_epoch': 1, 'start_batch': 0, 'data_dir': 'data_dolly_clean', 'exp_dir': 'exp_dolly_v4', 'bpe_model': 'bpe_model/bpe.model', 'max_seq_length': 200, 'batch_size': 128, 'base_lr': 0.001, 'top_bidirectional': False, 'arch': 'v4', 'use_conformer': True, 'use_crf': True, 'use_focal': True, 'conformer_layers': 2, 'attn_window': 8, 'punct_weights': None, 'case_weights': None, 'epochs': 16, 'weight_decay': 2.5e-05, 'seed': 42, 'do_finetune': False, 'use_mux': False, 'finetune_ckpt': None}
+2026-07-05 00:23:59,733 INFO [train.py:389] ModelV4(
+  (embedding): Embedding(3500, 256)
+  (posenc): PositionalEncoding()
+  (blocks): ModuleList(
+    (0-1): 2 x ConformerLite(
+      (ff1): FeedForward(
+        (net): Sequential(
+          (0): LayerNorm((256,), eps=1e-05, elementwise_affine=True, bias=True)
+          (1): Linear(in_features=256, out_features=512, bias=True)
+          (2): SiLU()
+          (3): Dropout(p=0.3, inplace=False)
+          (4): Linear(in_features=512, out_features=256, bias=True)
+          (5): Dropout(p=0.3, inplace=False)
+        )
+      )
+      (attn): LocalMHSA(
+        (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True, bias=True)
+        (qkv): Linear(in_features=256, out_features=768, bias=True)
+        (proj): Linear(in_features=256, out_features=256, bias=True)
+        (drop): Dropout(p=0.3, inplace=False)
+      )
+      (conv): ConvModule(
+        (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True, bias=True)
+        (pw1): Conv1d(256, 512, kernel_size=(1,), stride=(1,))
+        (dw): Conv1d(256, 256, kernel_size=(7,), stride=(1,), padding=(3,), groups=256)
+        (bn): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, bias=True, track_running_stats=True)
+        (pw2): Conv1d(256, 256, kernel_size=(1,), stride=(1,))
+        (drop): Dropout(p=0.3, inplace=False)
+      )
+      (ff2): FeedForward(
+        (net): Sequential(
+          (0): LayerNorm((256,), eps=1e-05, elementwise_affine=True, bias=True)
+          (1): Linear(in_features=256, out_features=512, bias=True)
+          (2): SiLU()
+          (3): Dropout(p=0.3, inplace=False)
+          (4): Linear(in_features=512, out_features=256, bias=True)
+          (5): Dropout(p=0.3, inplace=False)
+        )
+      )
+      (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True, bias=True)
+    )
+  )
+  (biGRU): LSTM(256, 384, num_layers=2, batch_first=True, bidirectional=True)
+  (GRU): LSTM(768, 384, batch_first=True)
+  (decoder_case): Linear(in_features=768, out_features=4, bias=True)
+  (decoder_punct): Linear(in_features=768, out_features=4, bias=True)
+  (dropout1): Dropout(p=0.3, inplace=False)
+  (dropout2): Dropout(p=0.3, inplace=False)
+  (crf): CRF()
+  (focal): FocalLoss()
+)
+2026-07-05 00:23:59,733 INFO [train.py:392] Number of model parameters: 10175008

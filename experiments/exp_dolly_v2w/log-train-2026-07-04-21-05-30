@@ -1,0 +1,276 @@
+2026-07-04 21:05:31,010 INFO [train.py:365] Device: cuda:0
+2026-07-04 21:05:31,011 INFO [train.py:372] {'vocab_size': 3500, 'embedding_dim': 256, 'sequence_size': 200, 'hidden_size1': 384, 'hidden_size2': 384, 'out_size_case': 4, 'out_size_punct': 4, 'dropout': 0.3, 'gamma': 0.5, 'factor': 0.8, 'patience': 2, 'log_interval': 100, 'valid_interval': 300, 'batch_idx_train': 0, 'save_every_n': 200, 'best_train_loss': inf, 'best_valid_loss': inf, 'best_train_epoch': -1, 'best_valid_epoch': -1, 'case_loss': -1, 'punct_loss': -1, 'world_size': 1, 'master_port': 12354, 'tensorboard': True, 'start_epoch': 1, 'start_batch': 0, 'data_dir': 'data_dolly_clean', 'exp_dir': 'exp_dolly_v2w', 'bpe_model': 'bpe_model/bpe.model', 'max_seq_length': 200, 'batch_size': 128, 'base_lr': 0.002, 'punct_weights': [1.0, 1.6, 1.05, 1.4], 'case_weights': None, 'epochs': 14, 'weight_decay': 2.5e-05, 'seed': 42, 'do_finetune': False, 'use_mux': False, 'finetune_ckpt': None}
+2026-07-04 21:05:31,045 INFO [train.py:375] Model_new(
+  (embedding): Embedding(3500, 256)
+  (encoder): Encoder(
+    (layers): ModuleList(
+      (0-2): 3 x ConvLayer(
+        (conv): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=same)
+        (norm): LayerNorm()
+      )
+    )
+  )
+  (biGRU): LSTM(256, 384, num_layers=2, batch_first=True, bidirectional=True)
+  (GRU): LSTM(768, 384, batch_first=True)
+  (decoder_case): Linear(in_features=768, out_features=4, bias=True)
+  (decoder_punct): Linear(in_features=768, out_features=4, bias=True)
+  (dropout1): Dropout(p=0.3, inplace=False)
+  (dropout2): Dropout(p=0.3, inplace=False)
+)
+2026-07-04 21:05:31,046 INFO [train.py:378] Number of model parameters: 8784136
+2026-07-04 21:05:40,151 INFO [train.py:429] len(train_dl):607
+2026-07-04 21:05:40,151 INFO [train.py:430] len(valid_dl):13
+2026-07-04 21:05:40,151 INFO [train.py:432] Training started
+2026-07-04 21:05:40,750 INFO [train.py:462] Epoch 0, batch 0, lr: [2.00e-03], loss[2.411421060562134], case_loss[1.4127798080444336], punct_loss[1.4266304969787598], 
+2026-07-04 21:06:01,312 INFO [train.py:462] Epoch 0, batch 100, lr: [2.00e-03], loss[0.37303221225738525], case_loss[0.16423021256923676], punct_loss[0.2982885539531708], 
+2026-07-04 21:06:21,742 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-200.pt
+2026-07-04 21:06:21,995 INFO [train.py:462] Epoch 0, batch 200, lr: [2.00e-03], loss[0.2733451724052429], case_loss[0.11610064655542374], punct_loss[0.2246350198984146], 
+2026-07-04 21:06:42,487 INFO [train.py:494] start validation
+2026-07-04 21:06:43,302 INFO [train.py:506] Epoch 0, validation loss[0.23235075519635126]
+2026-07-04 21:06:43,506 INFO [train.py:462] Epoch 0, batch 300, lr: [2.00e-03], loss[0.2391127645969391], case_loss[0.1028856411576271], punct_loss[0.19461017847061157], 
+2026-07-04 21:07:04,065 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-400.pt
+2026-07-04 21:07:04,303 INFO [train.py:462] Epoch 0, batch 400, lr: [2.00e-03], loss[0.22811132669448853], case_loss[0.09744807332754135], punct_loss[0.18666180968284607], 
+2026-07-04 21:07:24,973 INFO [train.py:462] Epoch 0, batch 500, lr: [2.00e-03], loss[0.20731991529464722], case_loss[0.08366601914167404], punct_loss[0.17664843797683716], 
+2026-07-04 21:07:45,507 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-600.pt
+2026-07-04 21:07:45,534 INFO [train.py:494] start validation
+2026-07-04 21:07:46,349 INFO [train.py:506] Epoch 0, validation loss[0.19712978372207055]
+2026-07-04 21:07:46,555 INFO [train.py:462] Epoch 0, batch 600, lr: [2.00e-03], loss[0.2010473906993866], case_loss[0.08120831847190857], punct_loss[0.17119866609573364], 
+2026-07-04 21:07:47,760 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-0.pt
+2026-07-04 21:07:47,842 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:07:47,935 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:07:48,232 INFO [train.py:462] Epoch 1, batch 0, lr: [2.00e-03], loss[0.1918056309223175], case_loss[0.07602427154779434], punct_loss[0.16540195047855377], 
+2026-07-04 21:08:08,894 INFO [train.py:462] Epoch 1, batch 100, lr: [2.00e-03], loss[0.20184659957885742], case_loss[0.08078937232494354], punct_loss[0.17293888330459595], 
+2026-07-04 21:08:27,975 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-800.pt
+2026-07-04 21:08:29,673 INFO [train.py:462] Epoch 1, batch 200, lr: [2.00e-03], loss[0.1933295875787735], case_loss[0.07634631544351578], punct_loss[0.16711896657943726], 
+2026-07-04 21:08:50,255 INFO [train.py:494] start validation
+2026-07-04 21:08:51,074 INFO [train.py:506] Epoch 1, validation loss[0.18430833977002364]
+2026-07-04 21:08:51,280 INFO [train.py:462] Epoch 1, batch 300, lr: [2.00e-03], loss[0.18594235181808472], case_loss[0.07454977929592133], punct_loss[0.15913225710391998], 
+2026-07-04 21:09:10,411 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-1000.pt
+2026-07-04 21:09:12,101 INFO [train.py:462] Epoch 1, batch 400, lr: [2.00e-03], loss[0.18359389901161194], case_loss[0.07111044973134995], punct_loss[0.16069063544273376], 
+2026-07-04 21:09:32,887 INFO [train.py:462] Epoch 1, batch 500, lr: [2.00e-03], loss[0.1779576539993286], case_loss[0.07153390347957611], punct_loss[0.1520339399576187], 
+2026-07-04 21:09:52,015 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-1200.pt
+2026-07-04 21:09:53,504 INFO [train.py:494] start validation
+2026-07-04 21:09:54,322 INFO [train.py:506] Epoch 1, validation loss[0.1769968569278717]
+2026-07-04 21:09:54,529 INFO [train.py:462] Epoch 1, batch 600, lr: [2.00e-03], loss[0.16791102290153503], case_loss[0.06498188525438309], punct_loss[0.14704161882400513], 
+2026-07-04 21:09:55,733 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-1.pt
+2026-07-04 21:09:55,817 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:09:55,937 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:09:56,259 INFO [train.py:462] Epoch 2, batch 0, lr: [2.00e-03], loss[0.15377765893936157], case_loss[0.05741073563694954], punct_loss[0.13766704499721527], 
+2026-07-04 21:10:17,059 INFO [train.py:462] Epoch 2, batch 100, lr: [2.00e-03], loss[0.1687040627002716], case_loss[0.06476318091154099], punct_loss[0.14848697185516357], 
+2026-07-04 21:10:34,720 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-1400.pt
+2026-07-04 21:10:37,876 INFO [train.py:462] Epoch 2, batch 200, lr: [2.00e-03], loss[0.1753268539905548], case_loss[0.07035928219556808], punct_loss[0.1499536782503128], 
+2026-07-04 21:10:58,489 INFO [train.py:494] start validation
+2026-07-04 21:10:59,308 INFO [train.py:506] Epoch 2, validation loss[0.1753430194579638]
+2026-07-04 21:10:59,515 INFO [train.py:462] Epoch 2, batch 300, lr: [2.00e-03], loss[0.17312923073768616], case_loss[0.06724527478218079], punct_loss[0.1512628048658371], 
+2026-07-04 21:11:17,160 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-1600.pt
+2026-07-04 21:11:20,302 INFO [train.py:462] Epoch 2, batch 400, lr: [2.00e-03], loss[0.17161187529563904], case_loss[0.0674925372004509], punct_loss[0.14874190092086792], 
+2026-07-04 21:11:41,123 INFO [train.py:462] Epoch 2, batch 500, lr: [2.00e-03], loss[0.17566686868667603], case_loss[0.06956981122493744], punct_loss[0.1515672206878662], 
+2026-07-04 21:11:58,793 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-1800.pt
+2026-07-04 21:12:01,724 INFO [train.py:494] start validation
+2026-07-04 21:12:02,543 INFO [train.py:506] Epoch 2, validation loss[0.16871538758277893]
+2026-07-04 21:12:02,755 INFO [train.py:462] Epoch 2, batch 600, lr: [2.00e-03], loss[0.16402092576026917], case_loss[0.061189956963062286], punct_loss[0.14690139889717102], 
+2026-07-04 21:12:03,956 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-2.pt
+2026-07-04 21:12:04,042 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:12:04,166 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:12:04,485 INFO [train.py:462] Epoch 3, batch 0, lr: [2.00e-03], loss[0.1503833532333374], case_loss[0.05561146140098572], punct_loss[0.13538841903209686], 
+2026-07-04 21:12:25,294 INFO [train.py:462] Epoch 3, batch 100, lr: [2.00e-03], loss[0.15110643208026886], case_loss[0.05805056169629097], punct_loss[0.13293695449829102], 
+2026-07-04 21:12:41,476 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-2000.pt
+2026-07-04 21:12:46,080 INFO [train.py:462] Epoch 3, batch 200, lr: [2.00e-03], loss[0.1614338755607605], case_loss[0.06324376910924911], punct_loss[0.14027158915996552], 
+2026-07-04 21:13:06,684 INFO [train.py:494] start validation
+2026-07-04 21:13:07,503 INFO [train.py:506] Epoch 3, validation loss[0.16853256065111893]
+2026-07-04 21:13:07,708 INFO [train.py:462] Epoch 3, batch 300, lr: [2.00e-03], loss[0.16181543469429016], case_loss[0.06124661862850189], punct_loss[0.1436697542667389], 
+2026-07-04 21:13:23,948 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-2200.pt
+2026-07-04 21:13:28,577 INFO [train.py:462] Epoch 3, batch 400, lr: [2.00e-03], loss[0.16637831926345825], case_loss[0.06529467552900314], punct_loss[0.14440521597862244], 
+2026-07-04 21:13:49,327 INFO [train.py:462] Epoch 3, batch 500, lr: [2.00e-03], loss[0.15732955932617188], case_loss[0.06128886342048645], punct_loss[0.1372009962797165], 
+2026-07-04 21:14:05,530 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-2400.pt
+2026-07-04 21:14:09,911 INFO [train.py:494] start validation
+2026-07-04 21:14:10,731 INFO [train.py:506] Epoch 3, validation loss[0.16302054547346556]
+2026-07-04 21:14:10,936 INFO [train.py:462] Epoch 3, batch 600, lr: [2.00e-03], loss[0.16381144523620605], case_loss[0.06267012655735016], punct_loss[0.14448760449886322], 
+2026-07-04 21:14:12,131 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-3.pt
+2026-07-04 21:14:12,214 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:14:12,317 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:14:12,636 INFO [train.py:462] Epoch 4, batch 0, lr: [2.00e-03], loss[0.14530256390571594], case_loss[0.057488445192575455], punct_loss[0.12544874846935272], 
+2026-07-04 21:14:33,440 INFO [train.py:462] Epoch 4, batch 100, lr: [2.00e-03], loss[0.1498700976371765], case_loss[0.05515328422188759], punct_loss[0.13530972599983215], 
+2026-07-04 21:14:48,190 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-2600.pt
+2026-07-04 21:14:54,245 INFO [train.py:462] Epoch 4, batch 200, lr: [2.00e-03], loss[0.15114787220954895], case_loss[0.061086833477020264], punct_loss[0.12865862250328064], 
+2026-07-04 21:15:14,778 INFO [train.py:494] start validation
+2026-07-04 21:15:15,596 INFO [train.py:506] Epoch 4, validation loss[0.1626366927073552]
+2026-07-04 21:15:15,807 INFO [train.py:462] Epoch 4, batch 300, lr: [2.00e-03], loss[0.14242681860923767], case_loss[0.05183001235127449], punct_loss[0.12942400574684143], 
+2026-07-04 21:15:30,579 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-2800.pt
+2026-07-04 21:15:36,617 INFO [train.py:462] Epoch 4, batch 400, lr: [2.00e-03], loss[0.1680101752281189], case_loss[0.06844016164541245], punct_loss[0.14224286377429962], 
+2026-07-04 21:15:57,405 INFO [train.py:462] Epoch 4, batch 500, lr: [2.00e-03], loss[0.17019417881965637], case_loss[0.06549277156591415], punct_loss[0.1495734453201294], 
+2026-07-04 21:16:12,213 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-3000.pt
+2026-07-04 21:16:18,075 INFO [train.py:494] start validation
+2026-07-04 21:16:18,893 INFO [train.py:506] Epoch 4, validation loss[0.16149499783149132]
+2026-07-04 21:16:19,099 INFO [train.py:462] Epoch 4, batch 600, lr: [2.00e-03], loss[0.16392624378204346], case_loss[0.06416714936494827], punct_loss[0.1425129920244217], 
+2026-07-04 21:16:20,300 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-4.pt
+2026-07-04 21:16:20,383 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:16:20,493 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:16:20,802 INFO [train.py:462] Epoch 5, batch 0, lr: [2.00e-03], loss[0.14049692451953888], case_loss[0.052898719906806946], punct_loss[0.12514029443264008], 
+2026-07-04 21:16:41,563 INFO [train.py:462] Epoch 5, batch 100, lr: [2.00e-03], loss[0.14890725910663605], case_loss[0.05352305248379707], punct_loss[0.1362631469964981], 
+2026-07-04 21:16:54,871 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-3200.pt
+2026-07-04 21:17:02,368 INFO [train.py:462] Epoch 5, batch 200, lr: [2.00e-03], loss[0.15152473747730255], case_loss[0.05841633304953575], punct_loss[0.13301201164722443], 
+2026-07-04 21:17:22,928 INFO [train.py:494] start validation
+2026-07-04 21:17:23,746 INFO [train.py:506] Epoch 5, validation loss[0.16133238833684188]
+2026-07-04 21:17:23,957 INFO [train.py:462] Epoch 5, batch 300, lr: [2.00e-03], loss[0.15561643242835999], case_loss[0.06021769717335701], punct_loss[0.13628391921520233], 
+2026-07-04 21:17:37,271 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-3400.pt
+2026-07-04 21:17:44,777 INFO [train.py:462] Epoch 5, batch 400, lr: [2.00e-03], loss[0.15221340954303741], case_loss[0.06055087223649025], punct_loss[0.13094648718833923], 
+2026-07-04 21:18:05,547 INFO [train.py:462] Epoch 5, batch 500, lr: [2.00e-03], loss[0.16064304113388062], case_loss[0.062116578221321106], punct_loss[0.14075210690498352], 
+2026-07-04 21:18:18,881 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-3600.pt
+2026-07-04 21:18:26,167 INFO [train.py:494] start validation
+2026-07-04 21:18:26,985 INFO [train.py:506] Epoch 5, validation loss[0.15890928759024694]
+2026-07-04 21:18:27,194 INFO [train.py:462] Epoch 5, batch 600, lr: [2.00e-03], loss[0.15291845798492432], case_loss[0.06160833686590195], punct_loss[0.1304430216550827], 
+2026-07-04 21:18:28,407 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-5.pt
+2026-07-04 21:18:28,481 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:18:28,586 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:18:28,891 INFO [train.py:462] Epoch 6, batch 0, lr: [2.00e-03], loss[0.14867819845676422], case_loss[0.057522933930158615], punct_loss[0.13022181391716003], 
+2026-07-04 21:18:49,690 INFO [train.py:462] Epoch 6, batch 100, lr: [2.00e-03], loss[0.1453467756509781], case_loss[0.055297959595918655], punct_loss[0.12864115834236145], 
+2026-07-04 21:19:01,568 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-3800.pt
+2026-07-04 21:19:10,508 INFO [train.py:462] Epoch 6, batch 200, lr: [2.00e-03], loss[0.1555299460887909], case_loss[0.057498376816511154], punct_loss[0.14004509150981903], 
+2026-07-04 21:19:31,067 INFO [train.py:494] start validation
+2026-07-04 21:19:31,886 INFO [train.py:506] Epoch 6, validation loss[0.15771233691618994]
+2026-07-04 21:19:32,093 INFO [train.py:462] Epoch 6, batch 300, lr: [2.00e-03], loss[0.14949585497379303], case_loss[0.0573713593184948], punct_loss[0.13160642981529236], 
+2026-07-04 21:19:43,967 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-4000.pt
+2026-07-04 21:19:52,930 INFO [train.py:462] Epoch 6, batch 400, lr: [2.00e-03], loss[0.14367114007472992], case_loss[0.054369982331991196], punct_loss[0.12757308781147003], 
+2026-07-04 21:20:13,733 INFO [train.py:462] Epoch 6, batch 500, lr: [2.00e-03], loss[0.14971190690994263], case_loss[0.05874114856123924], punct_loss[0.12995822727680206], 
+2026-07-04 21:20:25,567 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-4200.pt
+2026-07-04 21:20:34,323 INFO [train.py:494] start validation
+2026-07-04 21:20:35,141 INFO [train.py:506] Epoch 6, validation loss[0.15778473821970132]
+2026-07-04 21:20:35,345 INFO [train.py:462] Epoch 6, batch 600, lr: [2.00e-03], loss[0.15622317790985107], case_loss[0.06036059185862541], punct_loss[0.13694655895233154], 
+2026-07-04 21:20:36,563 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-6.pt
+2026-07-04 21:20:36,636 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:20:36,749 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:20:37,061 INFO [train.py:462] Epoch 7, batch 0, lr: [2.00e-03], loss[0.13290484249591827], case_loss[0.046115584671497345], punct_loss[0.12398465722799301], 
+2026-07-04 21:20:57,919 INFO [train.py:462] Epoch 7, batch 100, lr: [2.00e-03], loss[0.14529100060462952], case_loss[0.05465611815452576], punct_loss[0.12947839498519897], 
+2026-07-04 21:21:08,304 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-4400.pt
+2026-07-04 21:21:18,737 INFO [train.py:462] Epoch 7, batch 200, lr: [2.00e-03], loss[0.1373327374458313], case_loss[0.04935384541749954], punct_loss[0.12568412721157074], 
+2026-07-04 21:21:39,330 INFO [train.py:494] start validation
+2026-07-04 21:21:40,148 INFO [train.py:506] Epoch 7, validation loss[0.1592489744608219]
+2026-07-04 21:21:40,354 INFO [train.py:462] Epoch 7, batch 300, lr: [2.00e-03], loss[0.1576809585094452], case_loss[0.06442909687757492], punct_loss[0.13321693241596222], 
+2026-07-04 21:21:50,767 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-4600.pt
+2026-07-04 21:22:01,211 INFO [train.py:462] Epoch 7, batch 400, lr: [2.00e-03], loss[0.16098064184188843], case_loss[0.061383139342069626], punct_loss[0.1422821581363678], 
+2026-07-04 21:22:21,931 INFO [train.py:462] Epoch 7, batch 500, lr: [2.00e-03], loss[0.14795656502246857], case_loss[0.05497220531105995], punct_loss[0.1328348070383072], 
+2026-07-04 21:22:32,334 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-4800.pt
+2026-07-04 21:22:42,540 INFO [train.py:494] start validation
+2026-07-04 21:22:43,358 INFO [train.py:506] Epoch 7, validation loss[0.1565134720160411]
+2026-07-04 21:22:43,567 INFO [train.py:462] Epoch 7, batch 600, lr: [2.00e-03], loss[0.14137226343154907], case_loss[0.0547487773001194], punct_loss[0.12374783307313919], 
+2026-07-04 21:22:44,773 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-7.pt
+2026-07-04 21:22:44,851 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:22:44,961 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:22:45,272 INFO [train.py:462] Epoch 8, batch 0, lr: [2.00e-03], loss[0.14156784117221832], case_loss[0.0532279871404171], punct_loss[0.12619979679584503], 
+2026-07-04 21:23:06,024 INFO [train.py:462] Epoch 8, batch 100, lr: [2.00e-03], loss[0.14286468923091888], case_loss[0.05488961935043335], punct_loss[0.1256786733865738], 
+2026-07-04 21:23:14,977 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-5000.pt
+2026-07-04 21:23:26,841 INFO [train.py:462] Epoch 8, batch 200, lr: [2.00e-03], loss[0.1438814103603363], case_loss[0.057389575988054276], punct_loss[0.12355975806713104], 
+2026-07-04 21:23:47,451 INFO [train.py:494] start validation
+2026-07-04 21:23:48,269 INFO [train.py:506] Epoch 8, validation loss[0.15745330315369827]
+2026-07-04 21:23:48,481 INFO [train.py:462] Epoch 8, batch 300, lr: [2.00e-03], loss[0.1414981484413147], case_loss[0.05216704681515694], punct_loss[0.12761585414409637], 
+2026-07-04 21:23:57,417 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-5200.pt
+2026-07-04 21:24:09,285 INFO [train.py:462] Epoch 8, batch 400, lr: [2.00e-03], loss[0.1434028446674347], case_loss[0.05585150420665741], punct_loss[0.1250733584165573], 
+2026-07-04 21:24:30,061 INFO [train.py:462] Epoch 8, batch 500, lr: [2.00e-03], loss[0.1577746868133545], case_loss[0.06146052107214928], punct_loss[0.1375916749238968], 
+2026-07-04 21:24:39,033 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-5400.pt
+2026-07-04 21:24:50,708 INFO [train.py:494] start validation
+2026-07-04 21:24:51,527 INFO [train.py:506] Epoch 8, validation loss[0.15485116380911607]
+2026-07-04 21:24:51,742 INFO [train.py:462] Epoch 8, batch 600, lr: [2.00e-03], loss[0.15004980564117432], case_loss[0.05308099091053009], punct_loss[0.13852688670158386], 
+2026-07-04 21:24:52,948 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-8.pt
+2026-07-04 21:24:53,028 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:24:53,137 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:24:53,447 INFO [train.py:462] Epoch 9, batch 0, lr: [2.00e-03], loss[0.12583525478839874], case_loss[0.042641740292310715], punct_loss[0.11884787678718567], 
+2026-07-04 21:25:14,243 INFO [train.py:462] Epoch 9, batch 100, lr: [2.00e-03], loss[0.14022818207740784], case_loss[0.05349518731236458], punct_loss[0.123904287815094], 
+2026-07-04 21:25:21,731 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-5600.pt
+2026-07-04 21:25:35,042 INFO [train.py:462] Epoch 9, batch 200, lr: [2.00e-03], loss[0.13778264820575714], case_loss[0.05042712762951851], punct_loss[0.12479359656572342], 
+2026-07-04 21:25:55,563 INFO [train.py:494] start validation
+2026-07-04 21:25:56,380 INFO [train.py:506] Epoch 9, validation loss[0.15678477860414064]
+2026-07-04 21:25:56,591 INFO [train.py:462] Epoch 9, batch 300, lr: [2.00e-03], loss[0.14616422355175018], case_loss[0.05599918216466904], punct_loss[0.1288072019815445], 
+2026-07-04 21:26:04,054 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-5800.pt
+2026-07-04 21:26:17,392 INFO [train.py:462] Epoch 9, batch 400, lr: [2.00e-03], loss[0.14418554306030273], case_loss[0.055112604051828384], punct_loss[0.12724706530570984], 
+2026-07-04 21:26:38,171 INFO [train.py:462] Epoch 9, batch 500, lr: [2.00e-03], loss[0.15233324468135834], case_loss[0.060401659458875656], punct_loss[0.13133084774017334], 
+2026-07-04 21:26:45,678 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-6000.pt
+2026-07-04 21:26:58,781 INFO [train.py:494] start validation
+2026-07-04 21:26:59,598 INFO [train.py:506] Epoch 9, validation loss[0.1549562903550955]
+2026-07-04 21:26:59,809 INFO [train.py:462] Epoch 9, batch 600, lr: [2.00e-03], loss[0.15106648206710815], case_loss[0.0592070110142231], punct_loss[0.13122782111167908], 
+2026-07-04 21:27:01,008 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-9.pt
+2026-07-04 21:27:01,084 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:27:01,397 INFO [train.py:462] Epoch 10, batch 0, lr: [2.00e-03], loss[0.1345471441745758], case_loss[0.049330711364746094], punct_loss[0.1217377632856369], 
+2026-07-04 21:27:22,192 INFO [train.py:462] Epoch 10, batch 100, lr: [2.00e-03], loss[0.1391029953956604], case_loss[0.053307946771383286], punct_loss[0.12256436049938202], 
+2026-07-04 21:27:28,225 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-6200.pt
+2026-07-04 21:27:42,970 INFO [train.py:462] Epoch 10, batch 200, lr: [2.00e-03], loss[0.1333256959915161], case_loss[0.048309631645679474], punct_loss[0.12145151197910309], 
+2026-07-04 21:28:03,535 INFO [train.py:494] start validation
+2026-07-04 21:28:04,352 INFO [train.py:506] Epoch 10, validation loss[0.15625000687745902]
+2026-07-04 21:28:04,554 INFO [train.py:462] Epoch 10, batch 300, lr: [1.60e-03], loss[0.15122000873088837], case_loss[0.06183353438973427], punct_loss[0.1276949644088745], 
+2026-07-04 21:28:10,573 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-6400.pt
+2026-07-04 21:28:25,347 INFO [train.py:462] Epoch 10, batch 400, lr: [1.60e-03], loss[0.13942772150039673], case_loss[0.053272079676389694], punct_loss[0.12307949364185333], 
+2026-07-04 21:28:46,092 INFO [train.py:462] Epoch 10, batch 500, lr: [1.60e-03], loss[0.1443047821521759], case_loss[0.05576794594526291], punct_loss[0.12648120522499084], 
+2026-07-04 21:28:52,109 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-6600.pt
+2026-07-04 21:29:06,670 INFO [train.py:494] start validation
+2026-07-04 21:29:07,489 INFO [train.py:506] Epoch 10, validation loss[0.15020452783657953]
+2026-07-04 21:29:07,695 INFO [train.py:462] Epoch 10, batch 600, lr: [1.60e-03], loss[0.1364687979221344], case_loss[0.0501321405172348], punct_loss[0.12333807349205017], 
+2026-07-04 21:29:08,895 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-10.pt
+2026-07-04 21:29:08,975 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:29:09,088 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:29:09,399 INFO [train.py:462] Epoch 11, batch 0, lr: [1.60e-03], loss[0.12382902204990387], case_loss[0.04481193795800209], punct_loss[0.11288155615329742], 
+2026-07-04 21:29:30,159 INFO [train.py:462] Epoch 11, batch 100, lr: [1.60e-03], loss[0.1288282424211502], case_loss[0.04763305187225342], punct_loss[0.11599313467741013], 
+2026-07-04 21:29:34,730 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-6800.pt
+2026-07-04 21:29:50,952 INFO [train.py:462] Epoch 11, batch 200, lr: [1.60e-03], loss[0.1414981186389923], case_loss[0.050801776349544525], punct_loss[0.12956619262695312], 
+2026-07-04 21:30:11,554 INFO [train.py:494] start validation
+2026-07-04 21:30:12,372 INFO [train.py:506] Epoch 11, validation loss[0.15269555839208457]
+2026-07-04 21:30:12,577 INFO [train.py:462] Epoch 11, batch 300, lr: [1.60e-03], loss[0.13552841544151306], case_loss[0.0528951920568943], punct_loss[0.11804746091365814], 
+2026-07-04 21:30:17,174 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-7000.pt
+2026-07-04 21:30:33,412 INFO [train.py:462] Epoch 11, batch 400, lr: [1.60e-03], loss[0.13520626723766327], case_loss[0.05026615783572197], punct_loss[0.12134301662445068], 
+2026-07-04 21:30:54,115 INFO [train.py:462] Epoch 11, batch 500, lr: [1.60e-03], loss[0.14228028059005737], case_loss[0.0548328161239624], punct_loss[0.12492495030164719], 
+2026-07-04 21:30:58,700 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-7200.pt
+2026-07-04 21:31:14,703 INFO [train.py:494] start validation
+2026-07-04 21:31:15,521 INFO [train.py:506] Epoch 11, validation loss[0.14926778582426217]
+2026-07-04 21:31:15,734 INFO [train.py:462] Epoch 11, batch 600, lr: [1.60e-03], loss[0.13568997383117676], case_loss[0.04711764305830002], punct_loss[0.12653189897537231], 
+2026-07-04 21:31:16,941 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-11.pt
+2026-07-04 21:31:17,019 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:31:17,132 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:31:17,444 INFO [train.py:462] Epoch 12, batch 0, lr: [1.60e-03], loss[0.12524907290935516], case_loss[0.042919475585222244], punct_loss[0.11761371791362762], 
+2026-07-04 21:31:38,191 INFO [train.py:462] Epoch 12, batch 100, lr: [1.60e-03], loss[0.12731090188026428], case_loss[0.047843873500823975], punct_loss[0.11352433264255524], 
+2026-07-04 21:31:41,328 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-7400.pt
+2026-07-04 21:31:58,979 INFO [train.py:462] Epoch 12, batch 200, lr: [1.60e-03], loss[0.1284199357032776], case_loss[0.04825902730226517], punct_loss[0.11451559513807297], 
+2026-07-04 21:32:19,526 INFO [train.py:494] start validation
+2026-07-04 21:32:20,344 INFO [train.py:506] Epoch 12, validation loss[0.15351739067297715]
+2026-07-04 21:32:20,551 INFO [train.py:462] Epoch 12, batch 300, lr: [1.60e-03], loss[0.13310500979423523], case_loss[0.051251769065856934], punct_loss[0.1169331967830658], 
+2026-07-04 21:32:23,666 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-7600.pt
+2026-07-04 21:32:41,349 INFO [train.py:462] Epoch 12, batch 400, lr: [1.60e-03], loss[0.13875561952590942], case_loss[0.05127540975809097], punct_loss[0.12497173994779587], 
+2026-07-04 21:33:02,147 INFO [train.py:462] Epoch 12, batch 500, lr: [1.60e-03], loss[0.14078709483146667], case_loss[0.05219142138957977], punct_loss[0.12656524777412415], 
+2026-07-04 21:33:05,278 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-7800.pt
+2026-07-04 21:33:22,806 INFO [train.py:494] start validation
+2026-07-04 21:33:23,625 INFO [train.py:506] Epoch 12, validation loss[0.15029731507484728]
+2026-07-04 21:33:23,837 INFO [train.py:462] Epoch 12, batch 600, lr: [1.60e-03], loss[0.1404879093170166], case_loss[0.05495432764291763], punct_loss[0.12219083309173584], 
+2026-07-04 21:33:25,039 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-12.pt
+2026-07-04 21:33:25,112 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:33:25,439 INFO [train.py:462] Epoch 13, batch 0, lr: [1.60e-03], loss[0.12456776946783066], case_loss[0.04705233871936798], punct_loss[0.11073633283376694], 
+2026-07-04 21:33:46,238 INFO [train.py:462] Epoch 13, batch 100, lr: [1.60e-03], loss[0.13334661722183228], case_loss[0.05359693616628647], punct_loss[0.11392810940742493], 
+2026-07-04 21:33:47,891 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-8000.pt
+2026-07-04 21:34:07,054 INFO [train.py:462] Epoch 13, batch 200, lr: [1.60e-03], loss[0.13679681718349457], case_loss[0.04881056025624275], punct_loss[0.1256946623325348], 
+2026-07-04 21:34:27,700 INFO [train.py:494] start validation
+2026-07-04 21:34:28,518 INFO [train.py:506] Epoch 13, validation loss[0.1516071638235679]
+2026-07-04 21:34:28,726 INFO [train.py:462] Epoch 13, batch 300, lr: [1.28e-03], loss[0.13289983570575714], case_loss[0.05253776162862778], punct_loss[0.11480296403169632], 
+2026-07-04 21:34:30,384 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-8200.pt
+2026-07-04 21:34:49,534 INFO [train.py:462] Epoch 13, batch 400, lr: [1.28e-03], loss[0.1314522922039032], case_loss[0.04588600620627403], punct_loss[0.12223755568265915], 
+2026-07-04 21:35:10,337 INFO [train.py:462] Epoch 13, batch 500, lr: [1.28e-03], loss[0.1332608461380005], case_loss[0.04981303587555885], punct_loss[0.11921115964651108], 
+2026-07-04 21:35:12,009 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-8400.pt
+2026-07-04 21:35:30,908 INFO [train.py:494] start validation
+2026-07-04 21:35:31,726 INFO [train.py:506] Epoch 13, validation loss[0.1472493329873452]
+2026-07-04 21:35:31,936 INFO [train.py:462] Epoch 13, batch 600, lr: [1.28e-03], loss[0.13258448243141174], case_loss[0.050636183470487595], punct_loss[0.11706899106502533], 
+2026-07-04 21:35:33,142 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-13.pt
+2026-07-04 21:35:33,218 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:35:33,324 INFO [train.py:267] Saving best-valid-loss checkpoint to exp_dolly_v2w/best-valid-loss.pt
+2026-07-04 21:35:33,644 INFO [train.py:462] Epoch 14, batch 0, lr: [1.28e-03], loss[0.11373572051525116], case_loss[0.039275165647268295], punct_loss[0.10637222230434418], 
+2026-07-04 21:35:54,441 INFO [train.py:462] Epoch 14, batch 100, lr: [1.28e-03], loss[0.11604949086904526], case_loss[0.04024291783571243], punct_loss[0.10829510539770126], 
+2026-07-04 21:35:54,642 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-8600.pt
+2026-07-04 21:36:15,239 INFO [train.py:462] Epoch 14, batch 200, lr: [1.28e-03], loss[0.12064480781555176], case_loss[0.04227406159043312], punct_loss[0.11195820569992065], 
+2026-07-04 21:36:35,830 INFO [train.py:494] start validation
+2026-07-04 21:36:36,648 INFO [train.py:506] Epoch 14, validation loss[0.15039831973039186]
+2026-07-04 21:36:36,857 INFO [train.py:462] Epoch 14, batch 300, lr: [1.28e-03], loss[0.12145566940307617], case_loss[0.043565426021814346], punct_loss[0.11127177625894547], 
+2026-07-04 21:36:37,063 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-8800.pt
+2026-07-04 21:36:57,720 INFO [train.py:462] Epoch 14, batch 400, lr: [1.28e-03], loss[0.12043406069278717], case_loss[0.045041076838970184], punct_loss[0.1077042669057846], 
+2026-07-04 21:37:18,497 INFO [train.py:462] Epoch 14, batch 500, lr: [1.28e-03], loss[0.1259388029575348], case_loss[0.0469445064663887], punct_loss[0.11284899711608887], 
+2026-07-04 21:37:18,706 INFO [train.py:286] Saving checkpoint to exp_dolly_v2w/checkpoint-9000.pt
+2026-07-04 21:37:39,092 INFO [train.py:494] start validation
+2026-07-04 21:37:39,910 INFO [train.py:506] Epoch 14, validation loss[0.1474529688174908]
+2026-07-04 21:37:40,123 INFO [train.py:462] Epoch 14, batch 600, lr: [1.28e-03], loss[0.13597255945205688], case_loss[0.05146465823054314], punct_loss[0.12072556465864182], 
+2026-07-04 21:37:41,326 INFO [train.py:244] Saving checkpoint to exp_dolly_v2w/epoch-14.pt
+2026-07-04 21:37:41,403 INFO [train.py:260] Saving best-train-loss checkpoint to exp_dolly_v2w/best-train-loss.pt
+2026-07-04 21:37:41,514 INFO [train.py:528] Done!

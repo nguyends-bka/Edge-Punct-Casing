@@ -1,0 +1,21 @@
+2026-07-05 00:05:39,907 INFO [eval_all.py:60] Device: cuda:0
+2026-07-05 00:05:39,948 INFO [eval_all.py:68] Number of model parameters: 10562824
+2026-07-05 00:05:39,948 INFO [eval_all.py:78] Loading checkpoint from exp_dolly_v3/epoch-10.pt
+2026-07-05 00:05:40,447 INFO [eval_all.py:87] test_file:data_dolly_clean/0_IWSLT2011_asr_test_text.txt, len(decode_dl):7
+2026-07-05 00:05:42,405 INFO [eval_all.py:121] Total evaluated tokens: 302403
+2026-07-05 00:05:42,758 INFO [eval_all.py:126] 
+CASE metrics (aggregated over full test set):
+----------------------------------------------------------------------
+2026-07-05 00:05:42,758 INFO [decode.py:139] LOWER: 	Prec [0.985], 	Rec [0.991], 	F1 [0.988], 
+2026-07-05 00:05:42,758 INFO [decode.py:139] UPPER: 	Prec [0.819], 	Rec [0.718], 	F1 [0.765], 
+2026-07-05 00:05:42,758 INFO [decode.py:139] CAP: 	Prec [0.901], 	Rec [0.836], 	F1 [0.868], 
+2026-07-05 00:05:42,758 INFO [decode.py:139] MIX_CASE: 	Prec [1.000], 	Rec [0.821], 	F1 [0.902], 
+2026-07-05 00:05:42,759 INFO [decode.py:143] Overall: 	Prec [0.900], 	Rec [0.835], 	F1 [0.866], 
+2026-07-05 00:05:42,759 INFO [eval_all.py:128] 
+PUNCT metrics (aggregated over full test set):
+======================================================================
+2026-07-05 00:05:42,759 INFO [decode.py:139] NO_PUNCT: 	Prec [0.980], 	Rec [0.981], 	F1 [0.981], 
+2026-07-05 00:05:42,759 INFO [decode.py:139] COMMA: 	Prec [0.597], 	Rec [0.642], 	F1 [0.619], 
+2026-07-05 00:05:42,759 INFO [decode.py:139] PERIOD: 	Prec [0.859], 	Rec [0.775], 	F1 [0.815], 
+2026-07-05 00:05:42,759 INFO [decode.py:139] QUESTION: 	Prec [0.680], 	Rec [0.638], 	F1 [0.658], 
+2026-07-05 00:05:42,759 INFO [decode.py:143] Overall: 	Prec [0.720], 	Rec [0.709], 	F1 [0.715], 

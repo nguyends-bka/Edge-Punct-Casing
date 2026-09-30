@@ -1,0 +1,21 @@
+2026-07-04 17:50:56,951 INFO [eval_all.py:55] Device: cuda:0
+2026-07-04 17:50:56,981 INFO [eval_all.py:63] Number of model parameters: 7257676
+2026-07-04 17:50:56,981 INFO [eval_all.py:73] Loading checkpoint from exp_finetune/epoch-5.pt
+2026-07-04 17:50:57,392 INFO [eval_all.py:82] test_file:dataset/data/0_IWSLT2011_asr_test_text.txt, len(decode_dl):12
+2026-07-04 17:50:58,644 INFO [eval_all.py:116] Total evaluated tokens: 521481
+2026-07-04 17:50:59,250 INFO [eval_all.py:121] 
+CASE metrics (aggregated over full test set):
+----------------------------------------------------------------------
+2026-07-04 17:50:59,250 INFO [decode.py:139] LOWER: 	Prec [0.977], 	Rec [0.985], 	F1 [0.981], 
+2026-07-04 17:50:59,251 INFO [decode.py:139] UPPER: 	Prec [0.954], 	Rec [0.930], 	F1 [0.942], 
+2026-07-04 17:50:59,251 INFO [decode.py:139] CAP: 	Prec [0.891], 	Rec [0.847], 	F1 [0.868], 
+2026-07-04 17:50:59,251 INFO [decode.py:139] MIX_CASE: 	Prec [0.982], 	Rec [0.974], 	F1 [0.978], 
+2026-07-04 17:50:59,251 INFO [decode.py:143] Overall: 	Prec [0.896], 	Rec [0.854], 	F1 [0.874], 
+2026-07-04 17:50:59,251 INFO [eval_all.py:123] 
+PUNCT metrics (aggregated over full test set):
+======================================================================
+2026-07-04 17:50:59,251 INFO [decode.py:139] NO_PUNCT: 	Prec [0.964], 	Rec [0.978], 	F1 [0.971], 
+2026-07-04 17:50:59,251 INFO [decode.py:139] COMMA: 	Prec [0.636], 	Rec [0.556], 	F1 [0.593], 
+2026-07-04 17:50:59,251 INFO [decode.py:139] PERIOD: 	Prec [0.682], 	Rec [0.594], 	F1 [0.635], 
+2026-07-04 17:50:59,251 INFO [decode.py:139] QUESTION: 	Prec [0.383], 	Rec [0.147], 	F1 [0.213], 
+2026-07-04 17:50:59,251 INFO [decode.py:143] Overall: 	Prec [0.653], 	Rec [0.569], 	F1 [0.608], 

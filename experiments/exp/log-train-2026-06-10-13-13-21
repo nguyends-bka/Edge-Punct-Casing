@@ -1,0 +1,77 @@
+2026-06-10 13:13:21,919 INFO [train.py:346] Device: cuda:0
+2026-06-10 13:13:21,921 INFO [train.py:353] {'vocab_size': 3500, 'embedding_dim': 100, 'sequence_size': 200, 'hidden_size1': 384, 'hidden_size2': 384, 'out_size_case': 4, 'out_size_punct': 4, 'dropout': 0.5, 'gamma': 0.5, 'factor': 0.8, 'patience': 2, 'log_interval': 100, 'valid_interval': 300, 'batch_idx_train': 0, 'save_every_n': 200, 'best_train_loss': inf, 'best_valid_loss': inf, 'best_train_epoch': -1, 'best_valid_epoch': -1, 'case_loss': -1, 'punct_loss': -1, 'world_size': 1, 'master_port': 12354, 'tensorboard': True, 'start_epoch': 1, 'start_batch': 0, 'data_dir': 'data', 'exp_dir': 'exp_10_6_2026', 'bpe_model': 'bpe_model/bpe.model', 'max_seq_length': 200, 'batch_size': 128, 'base_lr': 0.002, 'epochs': 10, 'weight_decay': 2.5e-05, 'seed': 42, 'do_finetune': False, 'use_mux': False, 'finetune_ckpt': None}
+2026-06-10 13:13:21,971 INFO [train.py:356] Model_new(
+  (embedding): Embedding(3500, 100)
+  (encoder): Encoder(
+    (layers): ModuleList(
+      (0-2): 3 x ConvLayer(
+        (conv): Conv1d(100, 100, kernel_size=(3,), stride=(1,), padding=same)
+        (norm): LayerNorm()
+      )
+    )
+  )
+  (biGRU): LSTM(100, 384, num_layers=2, batch_first=True, bidirectional=True)
+  (GRU): LSTM(768, 384, batch_first=True)
+  (decoder_case): Linear(in_features=768, out_features=4, bias=True)
+  (decoder_punct): Linear(in_features=768, out_features=4, bias=True)
+  (dropout1): Dropout(p=0.5, inplace=False)
+  (dropout2): Dropout(p=0.5, inplace=False)
+)
+2026-06-10 13:13:21,972 INFO [train.py:359] Number of model parameters: 7257676
+2026-06-10 13:13:48,089 INFO [train.py:403] len(train_dl):179
+2026-06-10 13:13:48,089 INFO [train.py:404] len(valid_dl):23
+2026-06-10 13:13:48,089 INFO [train.py:406] Training started
+2026-06-10 13:13:49,212 INFO [train.py:436] Epoch 0, batch 0, lr: [2.00e-03], loss[2.293750762939453], case_loss[1.3452131748199463], punct_loss[1.3550539016723633], 
+2026-06-10 13:14:26,529 INFO [train.py:436] Epoch 0, batch 100, lr: [2.00e-03], loss[0.39570850133895874], case_loss[0.18736165761947632], punct_loss[0.29763832688331604], 
+2026-06-10 13:14:57,471 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-0.pt
+2026-06-10 13:14:57,572 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:14:58,054 INFO [train.py:436] Epoch 1, batch 0, lr: [2.00e-03], loss[0.301161527633667], case_loss[0.13222092390060425], punct_loss[0.24134375154972076], 
+2026-06-10 13:15:06,199 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-200.pt
+2026-06-10 13:15:39,432 INFO [train.py:436] Epoch 1, batch 100, lr: [2.00e-03], loss[0.2614244520664215], case_loss[0.11425859481096268], punct_loss[0.21023695170879364], 
+2026-06-10 13:16:11,964 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-1.pt
+2026-06-10 13:16:12,056 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:16:12,581 INFO [train.py:436] Epoch 2, batch 0, lr: [2.00e-03], loss[0.2157343626022339], case_loss[0.08500996977090836], punct_loss[0.1867491453886032], 
+2026-06-10 13:16:29,998 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-400.pt
+2026-06-10 13:16:55,101 INFO [train.py:436] Epoch 2, batch 100, lr: [2.00e-03], loss[0.22466981410980225], case_loss[0.09616363793611526], punct_loss[0.18358024954795837], 
+2026-06-10 13:17:27,861 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-2.pt
+2026-06-10 13:17:27,941 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:17:28,482 INFO [train.py:436] Epoch 3, batch 0, lr: [2.00e-03], loss[0.19074463844299316], case_loss[0.07749941945075989], punct_loss[0.16177889704704285], 
+2026-06-10 13:17:54,800 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-600.pt
+2026-06-10 13:18:10,942 INFO [train.py:436] Epoch 3, batch 100, lr: [2.00e-03], loss[0.19348573684692383], case_loss[0.07748311012983322], punct_loss[0.16571803390979767], 
+2026-06-10 13:18:43,888 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-3.pt
+2026-06-10 13:18:43,972 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:18:44,517 INFO [train.py:436] Epoch 4, batch 0, lr: [2.00e-03], loss[0.17165055871009827], case_loss[0.0689411461353302], punct_loss[0.14672774076461792], 
+2026-06-10 13:19:19,911 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-800.pt
+2026-06-10 13:19:27,178 INFO [train.py:436] Epoch 4, batch 100, lr: [2.00e-03], loss[0.19011537730693817], case_loss[0.07643692940473557], punct_loss[0.16239778697490692], 
+2026-06-10 13:20:00,108 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-4.pt
+2026-06-10 13:20:00,198 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:20:00,744 INFO [train.py:436] Epoch 5, batch 0, lr: [2.00e-03], loss[0.16553115844726562], case_loss[0.06475105881690979], punct_loss[0.14397156238555908], 
+2026-06-10 13:20:43,407 INFO [train.py:436] Epoch 5, batch 100, lr: [2.00e-03], loss[0.1719110608100891], case_loss[0.06727871298789978], punct_loss[0.14947476983070374], 
+2026-06-10 13:20:45,118 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-1000.pt
+2026-06-10 13:21:16,299 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-5.pt
+2026-06-10 13:21:16,387 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:21:16,935 INFO [train.py:436] Epoch 6, batch 0, lr: [2.00e-03], loss[0.15022093057632446], case_loss[0.05646982789039612], punct_loss[0.13393014669418335], 
+2026-06-10 13:21:59,615 INFO [train.py:436] Epoch 6, batch 100, lr: [2.00e-03], loss[0.15695053339004517], case_loss[0.06127001345157623], punct_loss[0.13668647408485413], 
+2026-06-10 13:22:10,265 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-1200.pt
+2026-06-10 13:22:32,422 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-6.pt
+2026-06-10 13:22:32,504 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:22:33,061 INFO [train.py:436] Epoch 7, batch 0, lr: [2.00e-03], loss[0.13909000158309937], case_loss[0.05328935384750366], punct_loss[0.12257236242294312], 
+2026-06-10 13:23:15,623 INFO [train.py:436] Epoch 7, batch 100, lr: [2.00e-03], loss[0.1510419100522995], case_loss[0.05890753120183945], punct_loss[0.13162054121494293], 
+2026-06-10 13:23:35,197 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-1400.pt
+2026-06-10 13:23:48,541 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-7.pt
+2026-06-10 13:23:48,622 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:23:49,178 INFO [train.py:436] Epoch 8, batch 0, lr: [2.00e-03], loss[0.13208405673503876], case_loss[0.0493885837495327], punct_loss[0.11813638359308243], 
+2026-06-10 13:24:31,823 INFO [train.py:436] Epoch 8, batch 100, lr: [2.00e-03], loss[0.14921925961971283], case_loss[0.055875472724437714], punct_loss[0.1333482712507248], 
+2026-06-10 13:25:00,301 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-1600.pt
+2026-06-10 13:25:04,692 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-8.pt
+2026-06-10 13:25:04,776 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:25:05,310 INFO [train.py:436] Epoch 9, batch 0, lr: [2.00e-03], loss[0.12015736848115921], case_loss[0.04240446537733078], punct_loss[0.11107558012008667], 
+2026-06-10 13:25:47,795 INFO [train.py:436] Epoch 9, batch 100, lr: [2.00e-03], loss[0.13348616659641266], case_loss[0.05097944289445877], punct_loss[0.11786675453186035], 
+2026-06-10 13:26:20,823 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-9.pt
+2026-06-10 13:26:20,921 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:26:21,483 INFO [train.py:436] Epoch 10, batch 0, lr: [2.00e-03], loss[0.11398110538721085], case_loss[0.04028036445379257], punct_loss[0.10528677701950073], 
+2026-06-10 13:26:25,310 INFO [train.py:273] Saving checkpoint to exp_10_6_2026/checkpoint-1800.pt
+2026-06-10 13:27:04,175 INFO [train.py:436] Epoch 10, batch 100, lr: [2.00e-03], loss[0.13887238502502441], case_loss[0.05239894613623619], punct_loss[0.12353348731994629], 
+2026-06-10 13:27:37,250 INFO [train.py:231] Saving checkpoint to exp_10_6_2026/epoch-10.pt
+2026-06-10 13:27:37,331 INFO [train.py:247] Saving best-train-loss checkpoint to exp_10_6_2026/best-train-loss.pt
+2026-06-10 13:27:37,457 INFO [train.py:502] Done!

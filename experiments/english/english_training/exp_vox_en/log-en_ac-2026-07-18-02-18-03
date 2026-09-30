@@ -1,0 +1,2 @@
+2026-07-18 02:18:03,334 INFO [train_via_capu_full.py:89] clips: 162082 | train 158841 val 3241 | mel frames 145.7M
+2026-07-18 02:18:03,449 INFO [train_via_capu_full.py:102] use_acoustic=1 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 3.58M

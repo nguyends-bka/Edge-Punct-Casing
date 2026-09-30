@@ -1,0 +1,39 @@
+2026-07-05 09:48:11,344 INFO [train_via_capu.py:110] use_acoustic=0 | params=2,675,976 (2.68M)
+2026-07-05 09:48:14,462 INFO [train_via_capu.py:134] ep 00 | train_loss 0.591 | val CaseF1 0.862 PunctF1 0.531  *best*
+2026-07-05 09:48:16,847 INFO [train_via_capu.py:134] ep 01 | train_loss 0.341 | val CaseF1 0.902 PunctF1 0.603  *best*
+2026-07-05 09:48:18,963 INFO [train_via_capu.py:134] ep 02 | train_loss 0.258 | val CaseF1 0.901 PunctF1 0.641  *best*
+2026-07-05 09:48:21,085 INFO [train_via_capu.py:134] ep 03 | train_loss 0.197 | val CaseF1 0.908 PunctF1 0.638  *best*
+2026-07-05 09:48:23,330 INFO [train_via_capu.py:134] ep 04 | train_loss 0.138 | val CaseF1 0.914 PunctF1 0.651  *best*
+2026-07-05 09:48:25,545 INFO [train_via_capu.py:134] ep 05 | train_loss 0.095 | val CaseF1 0.912 PunctF1 0.656  *best*
+2026-07-05 09:48:27,753 INFO [train_via_capu.py:134] ep 06 | train_loss 0.067 | val CaseF1 0.915 PunctF1 0.658  *best*
+2026-07-05 09:48:29,943 INFO [train_via_capu.py:134] ep 07 | train_loss 0.047 | val CaseF1 0.918 PunctF1 0.651
+2026-07-05 09:48:32,140 INFO [train_via_capu.py:134] ep 08 | train_loss 0.035 | val CaseF1 0.914 PunctF1 0.656
+2026-07-05 09:48:34,333 INFO [train_via_capu.py:134] ep 09 | train_loss 0.026 | val CaseF1 0.915 PunctF1 0.650
+2026-07-05 09:48:36,551 INFO [train_via_capu.py:134] ep 10 | train_loss 0.017 | val CaseF1 0.919 PunctF1 0.669  *best*
+2026-07-05 09:48:38,758 INFO [train_via_capu.py:134] ep 11 | train_loss 0.011 | val CaseF1 0.918 PunctF1 0.659
+2026-07-05 09:48:40,969 INFO [train_via_capu.py:134] ep 12 | train_loss 0.009 | val CaseF1 0.918 PunctF1 0.676  *best*
+2026-07-05 09:48:43,160 INFO [train_via_capu.py:134] ep 13 | train_loss 0.005 | val CaseF1 0.921 PunctF1 0.671
+2026-07-05 09:48:45,363 INFO [train_via_capu.py:134] ep 14 | train_loss 0.003 | val CaseF1 0.923 PunctF1 0.674  *best*
+2026-07-05 09:48:47,587 INFO [train_via_capu.py:134] ep 15 | train_loss 0.002 | val CaseF1 0.925 PunctF1 0.667
+2026-07-05 09:48:49,806 INFO [train_via_capu.py:134] ep 16 | train_loss 0.001 | val CaseF1 0.922 PunctF1 0.674
+2026-07-05 09:48:52,042 INFO [train_via_capu.py:134] ep 17 | train_loss 0.001 | val CaseF1 0.924 PunctF1 0.676  *best*
+2026-07-05 09:48:54,256 INFO [train_via_capu.py:134] ep 18 | train_loss 0.001 | val CaseF1 0.924 PunctF1 0.677  *best*
+2026-07-05 09:48:56,472 INFO [train_via_capu.py:134] ep 19 | train_loss 0.001 | val CaseF1 0.924 PunctF1 0.675
+2026-07-05 09:48:58,662 INFO [train_via_capu.py:134] ep 20 | train_loss 0.001 | val CaseF1 0.924 PunctF1 0.676
+2026-07-05 09:49:00,876 INFO [train_via_capu.py:134] ep 21 | train_loss 0.001 | val CaseF1 0.923 PunctF1 0.675
+2026-07-05 09:49:03,096 INFO [train_via_capu.py:134] ep 22 | train_loss 0.001 | val CaseF1 0.924 PunctF1 0.677  *best*
+2026-07-05 09:49:05,297 INFO [train_via_capu.py:134] ep 23 | train_loss 0.000 | val CaseF1 0.924 PunctF1 0.675
+2026-07-05 09:49:07,532 INFO [train_via_capu.py:134] ep 24 | train_loss 0.001 | val CaseF1 0.924 PunctF1 0.675
+2026-07-05 09:49:07,532 INFO [train_via_capu.py:137] 
+BEST use_acoustic=0: CaseF1 0.924 PunctF1 0.677
+2026-07-05 09:49:07,674 INFO [train_via_capu.py:140] CASE (final):
+2026-07-05 09:49:07,681 INFO [decode.py:139] LOWER: 	Prec [0.983], 	Rec [0.993], 	F1 [0.988], 
+2026-07-05 09:49:07,681 INFO [decode.py:139] UPPER: 	Prec [1.000], 	Rec [0.308], 	F1 [0.471], 
+2026-07-05 09:49:07,681 INFO [decode.py:139] CAP: 	Prec [0.957], 	Rec [0.897], 	F1 [0.926], 
+2026-07-05 09:49:07,681 INFO [decode.py:143] Overall: 	Prec [0.957], 	Rec [0.893], 	F1 [0.924], 
+2026-07-05 09:49:07,681 INFO [train_via_capu.py:141] PUNCT (final):
+2026-07-05 09:49:07,689 INFO [decode.py:139] NO_PUNCT: 	Prec [0.952], 	Rec [0.975], 	F1 [0.963], 
+2026-07-05 09:49:07,689 INFO [decode.py:139] COMMA: 	Prec [0.549], 	Rec [0.411], 	F1 [0.470], 
+2026-07-05 09:49:07,689 INFO [decode.py:139] PERIOD: 	Prec [0.956], 	Rec [0.892], 	F1 [0.923], 
+2026-07-05 09:49:07,689 INFO [decode.py:139] QUESTION: 	Prec [0.613], 	Rec [0.463], 	F1 [0.528], 
+2026-07-05 09:49:07,689 INFO [decode.py:143] Overall: 	Prec [0.746], 	Rec [0.617], 	F1 [0.675], 

@@ -1,0 +1,105 @@
+========== [公曆 20廿六年 七月 十八日 週六 二時32分54秒] PIPELINE ENGLISH START ==========
+>>> Bước 1/3: train acoustic (model chính)
+[公曆 20廿六年 七月 十八日 週六 二時32分54秒] Bắt đầu train ViACaPu acoustic (d=256, ac_gru=1, cross=1, heads=4)
+2026-07-18 02:32:55,634 INFO [train_via_capu_full.py:89] clips: 162082 | train 158841 val 3241 | mel frames 145.7M
+2026-07-18 02:32:55,759 INFO [train_via_capu_full.py:102] use_acoustic=1 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 3.58M
+2026-07-18 02:35:39,087 INFO [train_via_capu_full.py:130] ep 00 | 163s | loss 0.199 | val CaseF1 0.920 PunctF1 0.750  *best*
+2026-07-18 02:38:15,997 INFO [train_via_capu_full.py:130] ep 01 | 157s | loss 0.143 | val CaseF1 0.927 PunctF1 0.769  *best*
+2026-07-18 02:40:52,089 INFO [train_via_capu_full.py:130] ep 02 | 156s | loss 0.132 | val CaseF1 0.933 PunctF1 0.777  *best*
+2026-07-18 02:43:28,076 INFO [train_via_capu_full.py:130] ep 03 | 156s | loss 0.124 | val CaseF1 0.933 PunctF1 0.783  *best*
+2026-07-18 02:46:03,331 INFO [train_via_capu_full.py:130] ep 04 | 155s | loss 0.118 | val CaseF1 0.934 PunctF1 0.789  *best*
+2026-07-18 02:48:39,439 INFO [train_via_capu_full.py:130] ep 05 | 156s | loss 0.112 | val CaseF1 0.938 PunctF1 0.792  *best*
+2026-07-18 02:51:15,029 INFO [train_via_capu_full.py:130] ep 06 | 156s | loss 0.106 | val CaseF1 0.940 PunctF1 0.789
+2026-07-18 02:53:52,095 INFO [train_via_capu_full.py:130] ep 07 | 157s | loss 0.099 | val CaseF1 0.942 PunctF1 0.796  *best*
+2026-07-18 02:56:29,712 INFO [train_via_capu_full.py:130] ep 08 | 158s | loss 0.091 | val CaseF1 0.943 PunctF1 0.799  *best*
+2026-07-18 02:59:05,126 INFO [train_via_capu_full.py:130] ep 09 | 155s | loss 0.083 | val CaseF1 0.943 PunctF1 0.799  *best*
+2026-07-18 03:01:40,383 INFO [train_via_capu_full.py:130] ep 10 | 155s | loss 0.075 | val CaseF1 0.945 PunctF1 0.796
+2026-07-18 03:04:17,106 INFO [train_via_capu_full.py:130] ep 11 | 157s | loss 0.070 | val CaseF1 0.944 PunctF1 0.797
+2026-07-18 03:04:17,107 INFO [train_via_capu_full.py:133] BEST use_acoustic=1: CaseF1 0.943 PunctF1 0.799
+2026-07-18 03:04:20,109 INFO [train_via_capu_full.py:135] CASE (final):
+2026-07-18 03:04:20,205 INFO [decode.py:139] LOWER: 	Prec [0.992], 	Rec [0.994], 	F1 [0.993], 
+2026-07-18 03:04:20,205 INFO [decode.py:139] UPPER: 	Prec [0.986], 	Rec [0.982], 	F1 [0.984], 
+2026-07-18 03:04:20,205 INFO [decode.py:139] CAP: 	Prec [0.945], 	Rec [0.927], 	F1 [0.936], 
+2026-07-18 03:04:20,205 INFO [decode.py:139] MIX_CASE: 	Prec [1.000], 	Rec [0.984], 	F1 [0.992], 
+2026-07-18 03:04:20,205 INFO [decode.py:143] Overall: 	Prec [0.952], 	Rec [0.936], 	F1 [0.944], 
+2026-07-18 03:04:20,205 INFO [train_via_capu_full.py:136] PUNCT (final):
+2026-07-18 03:04:20,300 INFO [decode.py:139] NO_PUNCT: 	Prec [0.984], 	Rec [0.979], 	F1 [0.982], 
+2026-07-18 03:04:20,300 INFO [decode.py:139] COMMA: 	Prec [0.638], 	Rec [0.698], 	F1 [0.667], 
+2026-07-18 03:04:20,300 INFO [decode.py:139] PERIOD: 	Prec [0.926], 	Rec [0.943], 	F1 [0.934], 
+2026-07-18 03:04:20,300 INFO [decode.py:139] QUESTION: 	Prec [0.868], 	Rec [0.760], 	F1 [0.810], 
+2026-07-18 03:04:20,300 INFO [decode.py:143] Overall: 	Prec [0.777], 	Rec [0.818], 	F1 [0.797], 
+[公曆 20廿六年 七月 十八日 週六 三時四分廿二秒] XONG acoustic -> /home/ai/nguyends/Edge-Punct-Casing/english_training/exp_vox_en/best_en_ac.pt
+>>> Bước 2/3: train text-only (ablation)
+[公曆 20廿六年 七月 十八日 週六 三時四分廿二秒] Bắt đầu train ViACaPu text-only (ablation, tắt acoustic)
+2026-07-18 03:04:23,825 INFO [train_via_capu_full.py:89] clips: 162082 | train 158841 val 3241 | mel frames 145.7M
+2026-07-18 03:04:23,948 INFO [train_via_capu_full.py:102] use_acoustic=0 | d=256 ac_gru=1 cross=1 heads=4 adj=0 | params 2.68M
+2026-07-18 03:05:33,166 INFO [train_via_capu_full.py:130] ep 00 | 69s | loss 0.212 | val CaseF1 0.919 PunctF1 0.752  *best*
+2026-07-18 03:06:40,001 INFO [train_via_capu_full.py:130] ep 01 | 67s | loss 0.146 | val CaseF1 0.926 PunctF1 0.766  *best*
+2026-07-18 03:07:47,076 INFO [train_via_capu_full.py:130] ep 02 | 67s | loss 0.134 | val CaseF1 0.932 PunctF1 0.777  *best*
+2026-07-18 03:08:54,394 INFO [train_via_capu_full.py:130] ep 03 | 67s | loss 0.126 | val CaseF1 0.932 PunctF1 0.776
+2026-07-18 03:10:02,447 INFO [train_via_capu_full.py:130] ep 04 | 68s | loss 0.120 | val CaseF1 0.935 PunctF1 0.783  *best*
+2026-07-18 03:11:10,340 INFO [train_via_capu_full.py:130] ep 05 | 68s | loss 0.114 | val CaseF1 0.938 PunctF1 0.789  *best*
+2026-07-18 03:12:19,594 INFO [train_via_capu_full.py:130] ep 06 | 69s | loss 0.107 | val CaseF1 0.941 PunctF1 0.795  *best*
+2026-07-18 03:13:27,167 INFO [train_via_capu_full.py:130] ep 07 | 68s | loss 0.100 | val CaseF1 0.941 PunctF1 0.801  *best*
+2026-07-18 03:14:35,853 INFO [train_via_capu_full.py:130] ep 08 | 69s | loss 0.092 | val CaseF1 0.944 PunctF1 0.799  *best*
+2026-07-18 03:15:43,076 INFO [train_via_capu_full.py:130] ep 09 | 67s | loss 0.084 | val CaseF1 0.944 PunctF1 0.804  *best*
+2026-07-18 03:16:52,427 INFO [train_via_capu_full.py:130] ep 10 | 69s | loss 0.077 | val CaseF1 0.945 PunctF1 0.802
+2026-07-18 03:18:02,969 INFO [train_via_capu_full.py:130] ep 11 | 71s | loss 0.072 | val CaseF1 0.944 PunctF1 0.802
+2026-07-18 03:18:02,969 INFO [train_via_capu_full.py:133] BEST use_acoustic=0: CaseF1 0.944 PunctF1 0.804
+2026-07-18 03:18:04,394 INFO [train_via_capu_full.py:135] CASE (final):
+2026-07-18 03:18:04,437 INFO [decode.py:139] LOWER: 	Prec [0.992], 	Rec [0.994], 	F1 [0.993], 
+2026-07-18 03:18:04,437 INFO [decode.py:139] UPPER: 	Prec [0.988], 	Rec [0.986], 	F1 [0.987], 
+2026-07-18 03:18:04,437 INFO [decode.py:139] CAP: 	Prec [0.941], 	Rec [0.930], 	F1 [0.936], 
+2026-07-18 03:18:04,437 INFO [decode.py:139] MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+2026-07-18 03:18:04,437 INFO [decode.py:143] Overall: 	Prec [0.949], 	Rec [0.939], 	F1 [0.944], 
+2026-07-18 03:18:04,437 INFO [train_via_capu_full.py:136] PUNCT (final):
+2026-07-18 03:18:04,480 INFO [decode.py:139] NO_PUNCT: 	Prec [0.984], 	Rec [0.981], 	F1 [0.982], 
+2026-07-18 03:18:04,480 INFO [decode.py:139] COMMA: 	Prec [0.662], 	Rec [0.688], 	F1 [0.675], 
+2026-07-18 03:18:04,480 INFO [decode.py:139] PERIOD: 	Prec [0.926], 	Rec [0.944], 	F1 [0.935], 
+2026-07-18 03:18:04,480 INFO [decode.py:139] QUESTION: 	Prec [0.840], 	Rec [0.760], 	F1 [0.798], 
+2026-07-18 03:18:04,480 INFO [decode.py:143] Overall: 	Prec [0.792], 	Rec [0.814], 	F1 [0.802], 
+[公曆 20廿六年 七月 十八日 週六 三時十八分五秒] XONG text-only -> /home/ai/nguyends/Edge-Punct-Casing/english_training/exp_vox_en/best_en_text.pt
+>>> Bước 3/3: đánh giá trên test split
+TEST: 1663 clips
+
+=== best_en_ac.pt | use_acoustic=1 | 35,775 words ===
+CASE:
+LOWER: 	Prec [0.992], 	Rec [0.993], 	F1 [0.993], 
+UPPER: 	Prec [0.992], 	Rec [0.990], 	F1 [0.991], 
+CAP: 	Prec [0.934], 	Rec [0.929], 	F1 [0.932], 
+MIX_CASE: 	Prec [1.000], 	Rec [0.966], 	F1 [0.982], 
+Overall: 	Prec [0.944], 	Rec [0.939], 	F1 [0.941], 
+PUNCT:
+NO_PUNCT: 	Prec [0.985], 	Rec [0.982], 	F1 [0.983], 
+COMMA: 	Prec [0.672], 	Rec [0.692], 	F1 [0.682], 
+PERIOD: 	Prec [0.915], 	Rec [0.937], 	F1 [0.926], 
+QUESTION: 	Prec [0.797], 	Rec [0.831], 	F1 [0.814], 
+Overall: 	Prec [0.798], 	Rec [0.819], 	F1 [0.809], 
+
+Punct confusion (hàng=true, cột=pred) [NONE,COMMA,PERIOD,QUES]:
+  NONE    [31919   475   105     2]
+  COMMA   [ 441 1066   34    0]
+  PERIOD  [  50   41 1558   13]
+  QUES    [ 3  4  5 59]
+TEST: 1663 clips
+
+=== best_en_text.pt | use_acoustic=0 | 35,775 words ===
+CASE:
+LOWER: 	Prec [0.993], 	Rec [0.992], 	F1 [0.993], 
+UPPER: 	Prec [0.986], 	Rec [0.997], 	F1 [0.991], 
+CAP: 	Prec [0.931], 	Rec [0.938], 	F1 [0.934], 
+MIX_CASE: 	Prec [1.000], 	Rec [1.000], 	F1 [1.000], 
+Overall: 	Prec [0.940], 	Rec [0.947], 	F1 [0.943], 
+PUNCT:
+NO_PUNCT: 	Prec [0.985], 	Rec [0.982], 	F1 [0.984], 
+COMMA: 	Prec [0.671], 	Rec [0.694], 	F1 [0.682], 
+PERIOD: 	Prec [0.917], 	Rec [0.946], 	F1 [0.932], 
+QUESTION: 	Prec [0.848], 	Rec [0.789], 	F1 [0.818], 
+Overall: 	Prec [0.800], 	Rec [0.824], 	F1 [0.812], 
+
+Punct confusion (hàng=true, cột=pred) [NONE,COMMA,PERIOD,QUES]:
+  NONE    [31916   481   102     2]
+  COMMA   [ 440 1069   32    0]
+  PERIOD  [  41   40 1573    8]
+  QUES    [ 4  3  8 56]
+========== [公曆 20廿六年 七月 十八日 週六 三時十八分十秒] PIPELINE ENGLISH DONE ==========

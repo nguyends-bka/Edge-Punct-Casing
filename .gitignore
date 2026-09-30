@@ -24,16 +24,25 @@ Thumbs.db
 *.swp
 *.swo
 
-# Training / inference outputs (experiment dirs + checkpoints)
-/experiments/
-/exp_seed/
-/exp_via_full/
+# Training / inference outputs.
+# Mặc định chặn mọi checkpoint và output, rồi mở lại (!) đúng những thư mục
+# chứa kết quả được BÁO CÁO TRONG BÀI, vì các checkpoint đó không tái tạo được
+# nếu không còn GPU. Mỗi file ~10-28 MB, dưới giới hạn 100 MB của GitHub.
 /output/
 /runs/
-*.log
 *.log.*
 *.pt
 *.pid
+
+# experiments/: các lần chạy cũ đã bị thay thế. Giữ LOG (1.7 MB), bỏ checkpoint
+# (18 GB, nhiều file > 100 MB nên GitHub từ chối).
+/experiments/**/*.pt
+
+# Mở lại checkpoint của các thí nghiệm dùng trong bài báo.
+!/exp_seed/**/*.pt
+!/exp_disentangle/**/*.pt
+!/exp_via_384_aux/**/*.pt
+!/exp_via_full/**/*.pt
 
 # Datasets and generated corpora (too large for GitHub).
 # data/ holds SSD copies + symlinks to external storage (HDD / ngocmx account).

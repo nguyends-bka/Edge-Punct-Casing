@@ -1,0 +1,5 @@
+2026-07-16 14:47:51,146 INFO [train_via_capu_full.py:86] clips: 658128 | train 644966 val 13162 | mel frames 350.4M
+2026-07-16 14:47:51,284 INFO [train_via_capu_full.py:99] use_acoustic=1 | d=384 ac_gru=2 cross=2 heads=6 adj=1 | params 8.90M
+2026-07-16 15:28:40,768 INFO [train_via_capu_full.py:123] ep 00 | 2449s | loss 0.162 | val CaseF1 0.907 PunctF1 0.780  *best*
+2026-07-16 16:09:26,912 INFO [train_via_capu_full.py:123] ep 01 | 2446s | loss 0.133 | val CaseF1 0.907 PunctF1 0.787  *best*
+2026-07-16 16:50:14,501 INFO [train_via_capu_full.py:123] ep 02 | 2448s | loss 0.127 | val CaseF1 0.914 PunctF1 0.791  *best*
