@@ -122,7 +122,9 @@ def check_data(data_dir):
     for name, want in DATA_FILES.items():
         f = p / name
         if not f.exists():
-            print(f"[{BAD}] thiếu {name}")
+            # meta.npz đủ để xem thống kê; mel.f16 chỉ cần khi huấn luyện lại.
+            lvl = BAD if name == "meta.npz" else WARN
+            print(f"[{lvl}] thiếu {name}")
             ok = False
             continue
         got = f.stat().st_size
@@ -131,9 +133,50 @@ def check_data(data_dir):
         else:
             pct = 100 * got / want
             print(f"[{BAD}] {name:10s} {hr(got):>10s}  (cần {hr(want)}, mới {pct:.1f}%)")
-            print("       -> tải chưa xong; chạy lại rsync để nối tiếp")
+            print("       -> tải dở dang, KHÔNG dùng được. Nối tiếp bằng sftp:")
+            print("            sftp ai@bkmeeting.soict.io")
+            print("            cd /mnt/hdd_ngocmx/Edge-Punct-Casing/data_audio_full")
+            print(f"            reget {name}")
             ok = False
+
+    has_meta = (p / "meta.npz").exists()
+    has_mel = (p / "mel.f16").exists() and \
+        (p / "mel.f16").stat().st_size == DATA_FILES["mel.f16"]
+    if has_meta and not has_mel:
+        print()
+        print("       Có meta.npz (nhãn + thống kê) nhưng chưa có mel.f16 đầy đủ.")
+        print("       -> xem được phân bố nhãn, cách chia tập, thống kê trong bài")
+        print("       -> CHƯA huấn luyện lại được (cần mel.f16, 52 GB, và một GPU)")
     return ok
+
+
+def check_onnx():
+    """ONNX là bằng chứng triển khai cho luận điểm 'nhẹ, chạy được trên biên'."""
+    section("6. ONNX (tuỳ chọn)")
+    found = sorted(ROOT.glob("*.onnx"))
+    if not found:
+        print(f"[{WARN}] chưa export ONNX")
+        print("       -> python -m tools.export_onnx --ckpt exp_seed/best_ac_s43_aux5.pt \\")
+        print("            --out ac_aux.onnx")
+        return False
+    for f in found:
+        mb = f.stat().st_size / 1048576
+        print(f"[{OK}] {f.name:24s} {mb:6.1f} MB")
+    fp32 = [f for f in found if "int8" not in f.name.lower()]
+    int8 = [f for f in found if "int8" in f.name.lower()]
+    if fp32 and not int8:
+        print()
+        print("       Mới có bản FP32. Bài báo cơ sở công bố 7 MB ĐÃ LƯỢNG TỬ HOÁ,")
+        print("       nên muốn so sánh được cần thêm bản INT8:")
+        print("         pip install onnxruntime")
+        print("         python -c \"from onnxruntime.quantization import quantize_dynamic,"
+              " QuantType; quantize_dynamic('ac_aux.onnx','ac_aux_int8.onnx',"
+              "weight_type=QuantType.QUInt8)\"")
+    elif int8:
+        mb = int8[0].stat().st_size / 1048576
+        print()
+        print(f"       Bản INT8: {mb:.1f} MB — so được với 7 MB của mô hình cơ sở.")
+    return True
 
 
 def check_env():
@@ -150,12 +193,24 @@ def check_env():
         except ImportError:
             print(f"[{BAD}] {m:16s} thiếu  -> pip install {m}")
             ok = False
+        except Exception as e:
+            # Trên Windows, torch thiếu DLL ném OSError chứ không phải ImportError.
+            print(f"[{BAD}] {m:16s} cài rồi nhưng nạp lỗi: {type(e).__name__}")
+            print(f"         {str(e)[:150]}")
+            if m == "torch":
+                print("         -> thường do thiếu Microsoft Visual C++ Redistributable")
+                print("            hoặc bản torch không khớp Python/CUDA.")
+                print("            Cài lại CPU-only: pip install torch --index-url \\")
+                print("              https://download.pytorch.org/whl/cpu")
+            ok = False
     for m in optional:
         try:
             mod = __import__(m)
             print(f"[{OK}] {m:16s} {getattr(mod, '__version__', '?')}  (tuỳ chọn)")
         except ImportError:
             print(f"[{WARN}] {m:16s} thiếu   (tuỳ chọn)")
+        except Exception as e:
+            print(f"[{WARN}] {m:16s} nạp lỗi: {type(e).__name__}  (tuỳ chọn)")
     try:
         import torch
         if torch.cuda.is_available():
@@ -175,8 +230,8 @@ def check_load():
         return False
     try:
         import torch
-    except ImportError:
-        print(f"[{WARN}] chưa có torch, bỏ qua")
+    except Exception as e:
+        print(f"[{WARN}] torch không dùng được ({type(e).__name__}), bỏ qua — xem mục 4")
         return False
     try:
         d = torch.load(ck, map_location="cpu")
@@ -209,6 +264,7 @@ def main():
         "data": check_data(args.data_dir),
         "môi trường": check_env(),
         "nạp ckpt": check_load(),
+        "onnx": check_onnx(),
     }
 
     section("KẾT LUẬN")
