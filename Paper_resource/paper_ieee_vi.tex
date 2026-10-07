@@ -251,10 +251,18 @@ VietASR dạng RNN-T khoảng 68 triệu tham số, nhúng ký hiệu dấu câu
 \emph{trực tiếp vào từ điển đầu ra} và giải mã chung với đơn vị từ vựng, tinh chỉnh
 trên cùng bộ Dolly $\approx$1\,000 giờ mà bài báo này sử dụng. Hệ đó đạt micro-F1
 dấu câu 0{,}94 --- cao hơn mức 0{,}927 của ViACaPu --- và có đo độ trễ trên CPU/NPU.
-Hai công trình vì vậy bổ sung cho nhau hơn là cạnh tranh: khi được phép huấn luyện
-lại bộ nhận dạng, tích hợp đầu-cuối cho chất lượng cao hơn; còn ViACaPu nhắm kịch
-bản \emph{không} được phép làm vậy, và đạt chất lượng xấp xỉ với một mô-đun nhỏ hơn
-khoảng $19\times$ (3{,}58 so với 68 triệu tham số) gắn sau một bộ nhận dạng bất kỳ.
+Hai công trình vì vậy bổ sung cho nhau hơn là cạnh tranh: khi được phép huấn
+luyện lại bộ nhận dạng, tích hợp đầu-cuối cho chất lượng cao hơn; còn ViACaPu
+nhắm kịch bản \emph{không} được phép làm vậy, đổi lấy một mô-đun nhỏ hơn khoảng
+$19\times$ (3{,}58 so với 68 triệu tham số) gắn sau một bộ nhận dạng bất kỳ.
+Cần nói rõ hai điều về phép đối chiếu này. Thứ nhất, ViACaPu \emph{kém hơn}
+$0{,}013$ F1 dấu câu --- khoảng cách này lớn gấp ba độ lệch chuẩn giữa các seed
+của chúng tôi ($\pm0{,}004$), nên là chênh lệch thật chứ không phải nhiễu. Thứ
+hai, hai con số \emph{không} đo ở cùng điều kiện đầu vào: Trinh và cộng sự đánh
+giá trên đầu ra nhận dạng thật của chính hệ ASR của họ, còn kết quả của chúng
+tôi giả định $\mathrm{WER}=0$ (Mục~\ref{sec:problem}) --- một điều kiện
+\emph{thuận lợi hơn}. Khoảng cách thực tế khi triển khai do đó có thể lớn hơn
+$0{,}013$.
 
 \subsection{Định vị của ViACaPu}
 Bảng~\ref{tab:position} đối chiếu các công trình trên theo ba thuộc tính quyết định
@@ -266,11 +274,13 @@ luyện~\cite{bertpunct,jointcappunc,unipunc} đạt chất lượng cao nhưng 
 trăm triệu tham số. Mô hình nhẹ chỉ dùng văn bản~\cite{you2024lightweight} thỏa mãn
 ràng buộc quy mô nhưng bỏ qua tín hiệu tiếng nói. Các hệ nhúng dấu câu vào bộ nhận
 dạng~\cite{stpt,kim2023,trinh2026} khai thác tiếng nói đầy đủ nhất nhưng đòi hỏi
-huấn luyện lại bộ nhận dạng, nên không dùng được như thành phần gắn thêm. Theo hiểu
-biết của chúng tôi, ViACaPu là \emph{mô-đun hậu xử lý CaPu tiếng Việt nhận biết ngữ
-âm đầu tiên hoạt động độc lập với bộ nhận dạng}, và cũng là mô hình đầu tiên kết hợp
-cross-attention có cổng giữa trạng thái cấp từ và khung log-Mel ở ngân sách dưới
-4 triệu tham số.
+huấn luyện lại bộ nhận dạng, nên không dùng được như thành phần gắn thêm.
+ViACaPu chiếm ô còn trống: nhẹ, khai thác ngữ âm, và gắn ngoài được. Chúng tôi
+không nhấn mạnh tính ``đầu tiên'' của vị trí này --- một tuyên bố như vậy cần
+quá nhiều điều kiện đi kèm (ngôn ngữ, phương thức, cách tích hợp, ngân sách tham
+số) để có giá trị. Đóng góp mà chúng tôi cho là bền hơn nằm ở \emph{điều kiện để
+nhánh ngữ âm đóng góp ổn định} (Mục~\ref{sec:ablation}), vì phát hiện đó không
+giới hạn trong bài toán CaPu tiếng Việt.
 
 \begin{table}[htbp]
 \caption{Đối chiếu các phương pháp CaPu theo quy mô, nguồn thông tin đầu vào và mức
@@ -610,7 +620,7 @@ BPE (từ điển 3500); chỉ sub-word đầu của mỗi từ mang nhãn, các
 được che. Cần nhấn mạnh rằng chuỗi từ đưa vào mô hình được lấy từ chính \emph{bản ghi
 tham chiếu} chứ không phải từ đầu ra của một bộ nhận dạng, nên mọi kết quả trong bài
 tương ứng với kịch bản $\mathrm{WER}=0$ và là chặn trên của chất lượng triển khai. Phân bố nhãn lệch mạnh (Bảng~\ref{tab:data}), đặc biệt QUESTION chỉ
-chiếm 0.24\,\%, thúc đẩy việc dùng trọng số lớp trong \eqref{eq:loss}
+chiếm 0.25\,\% số vị trí được chấm điểm, thúc đẩy việc dùng trọng số lớp trong \eqref{eq:loss}
 (Mục~\ref{sec:objective}).
 
 \textbf{Đặc trưng âm học.} Âm thanh được lấy mẫu lại về 16\,kHz và trích phổ
@@ -619,7 +629,11 @@ log-Mel 80 chiều (cửa sổ 25\,ms, bước nhảy 10\,ms; \texttt{n\_fft}=40
 khung được nhánh ngữ âm giảm mẫu $4\times$ (Mục~\ref{sec:audio}).
 
 \begin{table}[htbp]
-\caption{Thống kê bộ dữ liệu Dolly-1000h.}
+\caption{Thống kê bộ dữ liệu Dolly-1000h. Tần suất nhãn được tính trên
+\emph{tập vị trí được chấm điểm} (14.03 triệu từ, đã loại hai từ biên của mỗi
+đoạn theo Mục~\ref{sec:objective}), chứ không phải trên toàn bộ 15.35 triệu nhãn
+--- vì đó mới là phân bố mà hàm mất mát và các chỉ số thực sự nhìn thấy. Nếu
+tính trên toàn bộ, NONE là 91.6\,\% và QUES là 0.23\,\%.}
 \label{tab:data}
 \centering
 \setlength{\tabcolsep}{8pt}
@@ -628,14 +642,15 @@ khung được nhánh ngữ âm giảm mẫu $4\times$ (Mục~\ref{sec:audio}).
 Thuộc tính & Giá trị \\
 \midrule
 Số đoạn (train / val)        & 644{,}966 / 13{,}162 \\
-Tổng thời lượng âm thanh     & $\approx$973 giờ \\
-Độ dài đoạn (TB / max)       & 5.3 / 16.0\,s \\
-Tổng số từ có nhãn           & 15.3 triệu \\
+Tổng thời lượng âm thanh     & 973.4 giờ \\
+Độ dài đoạn (TB / trung vị / max) & 5.32 / 4.70 / 16.0\,s \\
+Tổng số từ có nhãn           & 15.35 triệu \\
+\quad trong đó \emph{được chấm điểm}  & 14.03 triệu \\
 \midrule
 Tần suất PUNCT (\%) & \\
-\quad NONE / COMMA / PERIOD / QUES & 90.8 / 4.15 / 4.81 / 0.24 \\
+\quad NONE / COMMA / PERIOD / QUES & 90.80 / 4.10 / 4.86 / 0.25 \\
 Tần suất CASE (\%) & \\
-\quad LOWER / UPPER / CAP / MIX    & 91.7 / 0.12 / 8.17 / 0.01 \\
+\quad LOWER / UPPER / CAP / MIX    & 91.70 / 0.12 / 8.17 / 0.01 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1102,11 +1117,19 @@ ba mô hình (cơ sở, ViACaPu chỉ-văn-bản, ViACaPu\,+\,aux) được ch�
 
 \textbf{Ngôn điệu giúp ở đâu.} Phần cải thiện không đồng đều giữa các lớp mà tập
 trung đúng nơi lý thuyết ngôn ngữ dự đoán. Dấu phẩy, vốn trùng với khoảng lặng
-trong lời nói tự nhiên, tăng $+0.228$ F1; câu hỏi, được đánh dấu bởi đường ngữ điệu
-lên ở cuối, cũng cải thiện tuy ở mức nhỏ hơn (lớp này rất hiếm, chỉ 0.24\,\% số
-token); viết hoa, quyết định bởi manh mối từ vựng và vị trí, gần như không đổi. Sự tương ứng giữa phần cải thiện quan sát được và đặc tính ngôn điệu
-của từng lớp phù hợp với giả thuyết rằng nhánh ngữ âm đang khai thác các manh mối
-prosody hữu ích. Đồng thời, ablation dung lượng cho thấy phần cải thiện này không
+trong lời nói tự nhiên, tăng $+0.228$ F1; viết hoa, quyết định bởi manh mối từ
+vựng và vị trí, gần như không đổi ($+0.007$). Sự tương phản giữa hai tác vụ này
+--- cùng một mô hình, cùng một biểu diễn hợp nhất, nhưng chỉ tác vụ gắn với ngôn
+điệu được hưởng lợi --- phù hợp với giả thuyết rằng nhánh ngữ âm đang khai thác
+các manh mối prosody hữu ích.
+
+Lớp QUESTION đáng lẽ cũng được hưởng lợi, vì câu hỏi được đánh dấu bởi đường ngữ
+điệu lên ở cuối. Quan sát được là $0{,}733\pm0{,}014 \rightarrow 0{,}752\pm0{,}006$,
+tức $+0{,}019$ --- nhưng độ lệch chuẩn giữa các seed của riêng cấu hình
+chỉ-văn-bản đã là $0{,}014$, nên \emph{mức cải thiện này không tách được khỏi
+nhiễu}. Với chỉ 0.25\,\% số token được chấm điểm (khoảng 34\,500 nhãn), lớp này
+quá hiếm để kết luận bất cứ điều gì; chúng tôi báo cáo con số nhưng không coi
+đó là bằng chứng ủng hộ giả thuyết ngôn điệu. Đồng thời, ablation dung lượng cho thấy phần cải thiện này không
 thể được giải thích đơn thuần bằng việc tăng số tham số.
 
 \textbf{Về cơ chế: bằng chứng can thiệp, không chỉ tương quan.} Khác với chỉ quan
@@ -1154,9 +1177,11 @@ một ngôn ngữ và một miền tiếng nói;
 mức độ chuyển giao của các cải thiện phụ thuộc vào việc quy ước dấu câu của bộ dữ
 liệu phản ánh trung thực cách ngắt nghỉ của người nói đến đâu, thay vì theo phong
 cách biên tập. Lớp QUESTION vẫn là lớp yếu nhất (F1 $0{,}746$--$0{,}756$ qua ba
-seed), phản ánh sự khan hiếm của nó (0.24\,\% số token); vì lớp này quá hiếm,
-biến thiên giữa các seed cùng bậc với mức cải thiện quan sát được, nên chúng tôi
-\emph{không} rút ra kết luận nào riêng cho QUESTION. Về mặt cơ chế, dù thí nghiệm mất mát phụ cho thấy nhánh
+seed), phản ánh sự khan hiếm của nó (0.25\,\% số vị trí được chấm, khoảng
+34\,500 nhãn). Mức cải thiện $+0{,}019$ so với biến thể chỉ-văn-bản nhỏ hơn độ
+lệch chuẩn giữa các seed của chính biến thể đó ($0{,}014$), nên chúng tôi
+\emph{không} rút ra kết luận nào riêng cho QUESTION --- kể cả kết luận ủng hộ
+giả thuyết ngôn điệu, dù lớp này về lý thuyết phải được hưởng lợi. Về mặt cơ chế, dù thí nghiệm mất mát phụ cho thấy nhánh
 ngữ âm giúp \emph{nhờ} mã hóa đặc trưng năng lượng/ngôn điệu, chúng tôi chưa định vị
 được chính xác từng khoảng lặng mà mô hình khai thác; đây là mức phân tích sâu hơn
 để lại cho tương lai. Bộ siêu tham số còn lại (hệ số mất mát chính, trọng số lớp,
