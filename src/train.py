@@ -51,6 +51,14 @@ def main():
                          "encoder to learn pause/dynamics early (0 = off)")
     ap.add_argument("--gate_bias", type=float, default=None,
                     help="init fusion-gate bias (negative => more acoustic flows early)")
+    ap.add_argument("--aux_target", type=str, default="energy",
+                    choices=["energy", "random_proj"],
+                    help="mục tiêu của mất mát phụ. 'energy' = năng lượng khung "
+                         "(gắn với khoảng lặng/ngôn điệu). 'random_proj' = một phép "
+                         "chiếu NGẪU NHIÊN CỐ ĐỊNH của phổ, KHÔNG mang thông tin "
+                         "ngôn điệu -- ô đối chứng để phân biệt hai giả thuyết: "
+                         "(a) aux loss giúp nhờ NỘI DUNG ngôn điệu, hay (b) chỉ nhờ "
+                         "cung cấp gradient trực tiếp cho encoder ngữ âm.")
     ap.add_argument("--lr_const_epochs", type=int, default=0,
                     help="hold lr constant for the first N epochs before cosine decay")
     ap.add_argument("--seed", type=int, default=42,
@@ -89,6 +97,7 @@ def main():
     npar = sum(p.numel() for p in model.parameters())
     logging.info(f"use_acoustic={args.use_acoustic} | d={args.d} ac_gru={args.ac_gru_layers} "
                  f"cross={args.cross_layers} heads={args.n_heads} adj={args.adjacent_heads} "
+                 f"aux_target={args.aux_target} "
                  f"| params {npar/1e6:.2f}M")
     if args.init_from:
         ck = torch.load(args.init_from, map_location="cpu")
@@ -101,6 +110,7 @@ def main():
         opt, max(1, args.epochs - args.lr_const_epochs))
 
     best = (0.0, 0.0)
+    aux_proj = None          # khởi tạo lười cho --aux_target random_proj
     for ep in range(args.epochs):
         model.train(); t0 = time.time(); tot = 0.0; nb = 0
         for batch in tr:
@@ -111,8 +121,19 @@ def main():
             ploss = F.cross_entropy(pl.reshape(-1, pl.shape[-1])[m], batch["punct"].reshape(-1)[m], weight=pw)
             loss = closs + 0.7 * ploss
             if args.aux_energy_w > 0 and ae is not None:
-                # target: per-frame mean log-mel, avg-pooled 4x to match encoder stride
-                mt = batch["mel"].mean(-1)                      # [B, T]
+                # target: per-frame mean log-mel, avg-pooled 4x to match encoder stride.
+                # Với --aux_target random_proj, thay trung bình theo tần số bằng một
+                # phép chiếu ngẫu nhiên CỐ ĐỊNH (seed 1234, không phụ thuộc --seed nên
+                # mọi seed dùng chung một mục tiêu). Phép chiếu này phá cấu trúc
+                # ngôn điệu nhưng vẫn cho encoder một tín hiệu hồi quy trực tiếp.
+                if args.aux_target == "random_proj":
+                    if aux_proj is None:
+                        g = torch.Generator(device="cpu").manual_seed(1234)
+                        aux_proj = torch.randn(80, generator=g).to(dev)
+                        aux_proj = aux_proj / aux_proj.norm()
+                    mt = batch["mel"] @ aux_proj                # [B, T]
+                else:
+                    mt = batch["mel"].mean(-1)                  # [B, T]
                 B, T = mt.shape
                 pad = (4 - T % 4) % 4
                 if pad:

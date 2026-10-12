@@ -304,7 +304,7 @@ UniPunc~\cite{unipunc}              & BERT + wav2vec 2.0, $d{=}768^\dagger$ & v�
 You \& Li~\cite{you2024lightweight} & 7\,MB$^\ddagger$; 7{,}26M$^{\dagger*}$ & văn bản & gắn ngoài \\
 Trinh và cs.~\cite{trinh2026}       & 68M$^\dagger$ (RNN-T)               & văn bản + ngữ âm & tích hợp trong ASR \\
 \midrule
-\textbf{ViACaPu (bài này)}          & \textbf{4{,}93\,MB}$^\ddagger$; \textbf{3{,}58M}$^\dagger$ & \textbf{văn bản + ngữ âm} & \textbf{gắn ngoài} \\
+\textbf{ViACaPu (bài này)}          & \textbf{4{,}34\,MB}$^\ddagger$; \textbf{3{,}58M}$^\dagger$ & \textbf{văn bản + ngữ âm} & \textbf{gắn ngoài} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1078,6 +1078,46 @@ chất lượng cao hơn (kể cả ở cấu hình có mất mát phụ). Mô h
 điểm cân bằng tốt hơn hẳn giữa chất lượng, số tham số và chi phí huấn luyện
 trong số các cấu hình đã thử.
 
+\subsection{Kích thước và chất lượng sau lượng tử hoá}
+\label{sec:onnx}
+
+Để kiểm chứng luận điểm ``phù hợp thiết bị biên'' bằng một đại lượng đo được
+thay vì chỉ bằng số tham số, chúng tôi xuất mô hình sang ONNX (opset 17) rồi
+lượng tử hoá động trọng số về INT8, và \emph{chấm lại F1 của mô hình đã lượng
+tử hoá} trên cùng tập kiểm định với cùng mặt nạ chấm điểm.
+
+\begin{table}[htbp]
+\caption{Kích thước tệp và chất lượng trước/sau lượng tử hoá, chấm trên cùng
+tập kiểm định. Mô hình cơ sở~\cite{you2024lightweight} công bố 7\,MB cho tệp
+ONNX đã lượng tử hoá, nên dòng INT8 là phép so sánh cùng đơn vị đo. Lượng tử
+hoá \emph{không} làm giảm F1 dấu câu; mức giảm $0{,}003$ ở F1 viết hoa nằm
+trong biên độ nhiễu giữa các seed (Bảng~\ref{tab:seed}).}
+\label{tab:onnx}
+\centering
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lrcc}
+\toprule
+Phiên bản & Kích thước & F1 hoa & F1 câu \\
+\midrule
+Cơ sở~\cite{you2024lightweight}, INT8 & 7{,}00\,MB & --- & --- \\
+\midrule
+ViACaPu ONNX FP32          & 13{,}69\,MB & 0.943 & 0.924 \\
+\textbf{ViACaPu ONNX INT8} & \textbf{4{,}34\,MB} & \textbf{0.940} & \textbf{0.924} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Một ghi chú kỹ thuật đáng nêu vì nó ảnh hưởng tới tính dùng được của mô hình
+xuất ra. Khối cross-attention dùng \texttt{nn.MultiheadAttention} kèm
+\texttt{key\_padding\_mask}; khi xuất bằng bộ xuất ONNX dựa trên TorchScript,
+độ dài chuỗi khóa (số khung ngữ âm) bị \emph{cố định} theo giá trị đầu vào giả
+lúc xuất, khiến mô hình chỉ chạy đúng với đoạn âm thanh dài bằng đúng đoạn giả
+đó --- dù trục thời gian đã được khai báo động. Chúng tôi khắc phục bằng cách
+viết lại phép attention tường minh trong lớp bọc xuất ONNX (toán học không
+đổi; chênh lệch logit so với đường gốc là $1{,}9\times10^{-6}$, và nhãn dự
+đoán trùng khớp hoàn toàn). Sau sửa, mô hình chạy đúng với mọi độ dài đoạn và
+mọi kích thước batch.
+
 \subsection{Ảnh hưởng của huấn luyện đúng miền}
 
 
@@ -1153,9 +1193,10 @@ $d{=}384$ --- kể cả khi giữ nguyên mất mát phụ để so sánh công 
 lượng không tăng ($0{,}928$ so với $0{,}927$) mà chi phí \emph{huấn luyện} mỗi
 epoch cao hơn khoảng $3.7\times$ (Mục~\ref{sec:capacity}). Cấu hình 3.58 triệu
 tham số vì vậy là lựa chọn hợp lý trong số các cấu hình đã khảo sát. Về phía
-triển khai, mô hình xuất sang ONNX và lượng tử hoá INT8 cho tệp 4.93\,MB, nhỏ
+triển khai, mô hình xuất sang ONNX và lượng tử hoá INT8 cho tệp 4.34\,MB, nhỏ
 hơn mức 7\,MB của mô hình cơ sở~\cite{you2024lightweight} trong khi F1 dấu câu
-cao hơn $0{,}358$ --- nghĩa là lợi ích chất lượng ở đây không đánh đổi bằng
+cao hơn $0{,}358$, và lượng tử hoá \emph{không} làm giảm chất lượng dấu câu
+(Bảng~\ref{tab:onnx}) --- nghĩa là lợi ích chất lượng ở đây không đánh đổi bằng
 kích thước triển khai.
 
 \textbf{Hàm ý thiết kế.} Cơ chế hợp nhất không yêu cầu dấu thời gian mức từ:
@@ -1197,16 +1238,17 @@ trung bình\,$\pm$\,độ lệch chuẩn thay vì tuyên bố ý nghĩa thống 
 triển khai, lập luận về tính phù hợp với thiết bị biên trong bài dựa trên
 \emph{ngân sách tham số} (3.58 triệu) và \emph{kích thước mô hình sau lượng tử
 hoá}: xuất ViACaPu sang ONNX rồi lượng tử hoá động trọng số về INT8 cho tệp
-\textbf{4.93\,MB} (từ 13.71\,MB ở FP32), tức nhỏ hơn $1{,}4\times$ so với mức
+\textbf{4.34\,MB} (từ 13.69\,MB ở FP32), tức nhỏ hơn $1{,}6\times$ so với mức
 7\,MB mà~\cite{you2024lightweight} công bố cho mô hình cơ sở --- đây là phép so
-sánh cùng đơn vị đo, vì cả hai đều là tệp ONNX đã lượng tử hoá. Cần nêu rõ ba
-giới hạn của con số này. Thứ nhất, kích thước tệp không phụ thuộc phần cứng nên
-so sánh được, nhưng nó \emph{không} thay thế cho các phép đo phụ thuộc phần
-cứng: chúng tôi \emph{không} đo độ trễ suy luận, RTF hay bộ nhớ đỉnh trên thiết
-bị biên thật. Thứ hai, chúng tôi mới xác nhận mô hình INT8 \emph{nạp và chạy
-được}, chứ chưa chấm lại F1 của nó trên tập kiểm định, nên chưa loại trừ được
-khả năng lượng tử hoá làm giảm chất lượng. Thứ ba, đầu phụ dự đoán năng lượng
-đã được loại khỏi đồ thị xuất, đúng như thiết kế (Mục~\ref{sec:audio}).
+sánh cùng đơn vị đo, vì cả hai đều là tệp ONNX đã lượng tử hoá. Chúng tôi
+\emph{đã chấm lại} F1 của mô hình INT8 trên tập kiểm định
+(Bảng~\ref{tab:onnx}): lượng tử hoá giữ nguyên F1 dấu câu và làm giảm F1 viết
+hoa $0{,}003$, tức nằm trong biên độ nhiễu giữa các seed. Vẫn còn hai giới hạn.
+Thứ nhất, kích thước tệp không phụ thuộc phần cứng nên so sánh được, nhưng nó
+\emph{không} thay thế cho các phép đo phụ thuộc phần cứng: chúng tôi
+\emph{không} đo độ trễ suy luận, RTF hay bộ nhớ đỉnh trên thiết bị biên thật.
+Thứ hai, đầu phụ dự đoán năng lượng đã được loại khỏi đồ thị xuất, đúng như
+thiết kế (Mục~\ref{sec:audio}).
 Cuối cùng, kiến trúc hiện dùng
 các lớp hai chiều (BiLSTM/BiGRU), nên chưa phải mô hình streaming theo nghĩa nhân
 quả nghiêm ngặt; đánh giá chunked/causal là một hướng thực nghiệm tiếp theo.
