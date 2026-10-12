@@ -1084,14 +1084,18 @@ trong số các cấu hình đã thử.
 Để kiểm chứng luận điểm ``phù hợp thiết bị biên'' bằng một đại lượng đo được
 thay vì chỉ bằng số tham số, chúng tôi xuất mô hình sang ONNX (opset 17) rồi
 lượng tử hoá động trọng số về INT8, và \emph{chấm lại F1 của mô hình đã lượng
-tử hoá} trên cùng tập kiểm định với cùng mặt nạ chấm điểm.
+tử hoá} trên \emph{toàn bộ} tập kiểm định 13\,162 đoạn, với cùng phép chia
+\texttt{RandomState(42)}, cùng mặt nạ chấm điểm và cùng hàm độ đo như khi
+huấn luyện. Bản FP32 tái lập đúng điểm của checkpoint PyTorch gốc
+($0{,}945/0{,}930$), xác nhận đồ thị xuất ra tương đương về mặt số học.
 
 \begin{table}[htbp]
 \caption{Kích thước tệp và chất lượng trước/sau lượng tử hoá, chấm trên cùng
 tập kiểm định. Mô hình cơ sở~\cite{you2024lightweight} công bố 7\,MB cho tệp
 ONNX đã lượng tử hoá, nên dòng INT8 là phép so sánh cùng đơn vị đo. Lượng tử
-hoá \emph{không} làm giảm F1 dấu câu; mức giảm $0{,}003$ ở F1 viết hoa nằm
-trong biên độ nhiễu giữa các seed (Bảng~\ref{tab:seed}).}
+hoá làm giảm $0{,}003$ F1 viết hoa và $0{,}001$ F1 dấu câu --- cả hai đều nằm
+trong biên độ nhiễu giữa các seed (Bảng~\ref{tab:seed}), nên lượng tử hoá
+\emph{không} đánh đổi chất lượng lấy kích thước.}
 \label{tab:onnx}
 \centering
 \setlength{\tabcolsep}{7pt}
@@ -1101,8 +1105,8 @@ Phiên bản & Kích thước & F1 hoa & F1 câu \\
 \midrule
 Cơ sở~\cite{you2024lightweight}, INT8 & 7{,}00\,MB & --- & --- \\
 \midrule
-ViACaPu ONNX FP32          & 13{,}69\,MB & 0.943 & 0.924 \\
-\textbf{ViACaPu ONNX INT8} & \textbf{4{,}34\,MB} & \textbf{0.940} & \textbf{0.924} \\
+ViACaPu ONNX FP32          & 13{,}69\,MB & 0.945 & 0.930 \\
+\textbf{ViACaPu ONNX INT8} & \textbf{4{,}34\,MB} & \textbf{0.942} & \textbf{0.929} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1144,14 +1148,33 @@ liệu tiếng Anh), còn tập kiểm định chung là 13\,162 đoạn đượ
 bằng \texttt{RandomState(42)} trên toàn bộ Dolly-1000h (Bảng~\ref{tab:data}).
 Chúng tôi xác nhận độ dài câu trung bình của hai tập gần như bằng nhau
 ($\approx$21.6 và 21.7 từ/câu) nên phần chênh lệch $0{,}703 \to 0{,}569$
-\emph{không đến từ khác biệt độ dài câu}; nội dung câu của hai tập là rời nhau
-(kiểm tra bằng cách đối chiếu trực tiếp không thấy trùng dòng), nhưng chúng tôi
-chưa định lượng được yếu tố cụ thể nào trong 658\,128 đoạn của tập kiểm định
-chung (miền chủ đề, phong cách viết, hay đơn giản là quy mô mẫu lớn hơn hẳn)
-gây ra khoảng cách này. Đây là một giới hạn của phép so sánh: chúng tôi báo cáo
-cả hai con số một cách minh bạch, nhưng \emph{mọi kết luận chính của bài đều
-dùng con số $0{,}569$ trên tập kiểm định chung}, vì đó là tập duy nhất mà cả
-ba mô hình (cơ sở, ViACaPu chỉ-văn-bản, ViACaPu\,+\,aux) được chấm cùng lúc.
+\emph{không đến từ khác biệt độ dài câu}.
+
+\textbf{Nguyên nhân: tập valid của repo cơ sở nằm gần như trọn trong tập huấn
+luyện của chúng tôi.} Để truy nguyên, chúng tôi khớp từng dòng văn bản của tập
+đó với clip Dolly tương ứng (khớp được $12\,872/12\,978 = 99{,}2\,\%$) rồi
+đối chiếu với phép chia \texttt{RandomState(42)} của mình. Kết quả: chỉ
+$241$ clip ($1{,}9\,\%$) rơi vào tập kiểm định của chúng tôi, còn
+$12\,631$ clip ($\mathbf{98{,}1\,\%}$) nằm trong \emph{tập huấn luyện}. Hai
+phép chia tập được thực hiện độc lập trên cùng một corpus, nên phần giao nhau
+chỉ bằng đúng tỉ lệ $2\,\%$ của tập kiểm định --- và hệ quả là mọi điểm số đo
+trên tập valid của repo cơ sở đều \emph{lạc quan một cách hệ thống} đối với
+bất kỳ mô hình nào được chúng tôi huấn luyện.
+
+Chấm ViACaPu trên chính tập đó xác nhận chẩn đoán: F1 dấu câu $0{,}9425$ so
+với $0{,}930$ trên tập kiểm định chung, tức \emph{cũng} được nâng lên, nhưng
+chỉ $+0{,}012$ --- bằng khoảng một phần mười mức $+0{,}134$ của mô hình cơ sở.
+Mức chênh nhỏ ở ViACaPu là điều phải xảy ra: mô hình đã học thuộc một phần dữ
+liệu đó. Mức chênh lớn ở mô hình cơ sở cho thấy nó \emph{nhạy hơn nhiều} với
+việc được chấm trên dữ liệu đã thấy khi huấn luyện, phù hợp với việc nó không
+dùng trọng số lớp nên dễ ghi nhớ phân bố nhãn của tập huấn luyện hơn.
+
+Hệ quả cho cách đọc bài: con số $0{,}703$ \emph{không} phải một phép đánh giá
+hợp lệ và không nên dùng để so sánh với bất kỳ con số nào khác; chúng tôi giữ
+nó trong Hình~\ref{fig:domain} chỉ để minh họa hiệu ứng của huấn luyện đúng
+miền so với checkpoint gốc ($0{,}393$). \emph{Mọi kết luận chính của bài đều
+dùng tập kiểm định chung}, nơi cả ba mô hình được chấm cùng lúc trên dữ liệu
+mà không mô hình nào từng thấy.
 
 \section{Thảo Luận}
 
